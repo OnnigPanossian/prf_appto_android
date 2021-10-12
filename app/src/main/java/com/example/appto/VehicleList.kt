@@ -3,13 +3,17 @@ package com.example.appto
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appto.adapters.VehicleAdapter
 import com.example.appto.databinding.ActivityVehicleListBinding
+import com.example.appto.services.vehicleService
+import com.example.appto.viewmodels.VehicleViewModel
 
 class VehicleList : AppCompatActivity() {
 
-    lateinit var binding: ActivityVehicleListBinding
+    private lateinit var binding: ActivityVehicleListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,23 +21,19 @@ class VehicleList : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.vlRecycler.layoutManager = LinearLayoutManager(this)
+        val vehicleViewModel = ViewModelProvider(this).get(VehicleViewModel::class.java)
 
-        val vehicleList = mutableListOf<Vehicle>()
-        vehicleList.add(Vehicle("vehicle_id", "Porsche", "911", 2021, "Premium", 5F, 20))
-        vehicleList.add(Vehicle("vehicle_id", "Porsche", "911", 2021, "Premium", 5F, 20))
-        vehicleList.add(Vehicle("vehicle_id", "Porsche", "911", 2021, "Premium", 5F, 20))
-        vehicleList.add(Vehicle("vehicle_id", "Porsche", "911", 2021, "Premium", 5F, 20))
-        vehicleList.add(Vehicle("vehicle_id", "Porsche", "911", 2021, "Premium", 5F, 20))
-        vehicleList.add(Vehicle("vehicle_id", "Porsche", "911", 2021, "Premium", 5F, 20))
-        vehicleList.add(Vehicle("vehicle_id", "Porsche", "911", 2021, "Premium", 5F, 20))
+        vehicleViewModel.vehicleList.observe(this, { vehicleList ->
+            run {
+                binding.vlRecycler.adapter = VehicleAdapter(vehicleList)
+                if (vehicleList.isEmpty()) {
+                    binding.vlEmptyView.visibility = View.VISIBLE
+                } else {
+                    binding.vlEmptyView.visibility = View.GONE
+                }
+            }
+        })
 
-        val adapter = VehicleAdapter(vehicleList)
-        binding.vlRecycler.adapter = adapter
 
-        if (vehicleList.isEmpty()) {
-            binding.vlEmptyView.visibility = View.VISIBLE
-        } else {
-            binding.vlEmptyView.visibility = View.GONE
-        }
     }
 }
