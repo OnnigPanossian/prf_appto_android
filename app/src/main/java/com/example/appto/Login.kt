@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.appto.databinding.ActivityLoginBinding
 
-
 class Login : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
