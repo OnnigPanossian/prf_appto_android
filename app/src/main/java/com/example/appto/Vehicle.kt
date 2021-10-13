@@ -1,12 +1,15 @@
 package com.example.appto
 
-class Vehicle(
+import com.squareup.moshi.Json
+
+data class Vehicle(
+    @Json(name = "_id")
     val id: String,
     val brand: String,
     val model: String,
     val year: Int,
-    val category: String,
+    val category: String?,
     var rating: Float = 0F,
-    var countRating: Int = 0
+    var timesRated: Int = 0
 ) {
 }

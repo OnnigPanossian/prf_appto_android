@@ -32,6 +32,8 @@ class VehicleAdapter(private val vList: List<Vehicle>) :
             binding.tvCategory.text = vehicle.category
             (vehicle.brand + " " + vehicle.model).also { binding.tvModel.text = it }
             ("Año: " + vehicle.year.toString()).also { binding.tvYear.text = it }
+
+            binding.executePendingBindings()
         }
     }
 }
