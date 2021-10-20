@@ -1,17 +1,15 @@
-package com.example.appto
+package com.example.appto.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appto.adapters.VehicleAdapter
 import com.example.appto.databinding.ActivityVehicleListBinding
-import com.example.appto.services.vehicleService
 import com.example.appto.viewmodels.VehicleViewModel
 
-class VehicleList : AppCompatActivity() {
+class VehicleListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityVehicleListBinding
 

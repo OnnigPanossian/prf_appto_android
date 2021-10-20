@@ -1,4 +1,4 @@
-package com.example.appto
+package com.example.appto.models
 
 import com.squareup.moshi.Json
 
@@ -11,5 +11,4 @@ data class Vehicle(
     val category: String?,
     var rating: Float = 0F,
     var timesRated: Int = 0
-) {
-}
+)

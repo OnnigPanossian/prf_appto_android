@@ -10,7 +10,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".VehicleList">
+        tools:context=".activities.VehicleListActivity">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/vl_recycler"
