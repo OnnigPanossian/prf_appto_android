@@ -9,16 +9,16 @@ interface UserService {
     suspend fun register(@Body user: User): User
 
     @POST("users/login")
-    fun login(@Body user: User): User
+    suspend fun login(@Body user: User): User
 
     @POST("users/logout")
-    fun logout(@Header("Authorization") token: String): Void
+    suspend fun logout(@Header("Authorization") token: String): Void
 
     @GET("users/me")
-    fun getUser(@Header("Authorization") token: String): User
+    suspend fun getUser(@Header("Authorization") token: String): User
 
     @DELETE("users/me")
-    fun delete(@Header("Authorization") token: String): Void
+    suspend fun delete(@Header("Authorization") token: String): Void
 }
 
 val userService: UserService = Retrofit.restClient.create(UserService::class.java)

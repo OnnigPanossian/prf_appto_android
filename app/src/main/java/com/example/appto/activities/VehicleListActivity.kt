@@ -19,7 +19,7 @@ class VehicleListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.vlRecycler.layoutManager = LinearLayoutManager(this)
-        val vehicleViewModel = ViewModelProvider(this).get(VehicleViewModel::class.java)
+        val vehicleViewModel = ViewModelProvider(this)[VehicleViewModel::class.java]
 
         vehicleViewModel.vehicleList.observe(this, { vehicleList ->
             run {
