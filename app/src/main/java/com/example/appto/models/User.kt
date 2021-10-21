@@ -5,14 +5,14 @@ import java.util.Date
 
 data class User(
     @Json(name = "_id")
-    val id: String,
-    val name: String,
+    val id: String?,
+    val name: String?,
     val password: String?,
     val email: String,
     val image: String?,
     val dateOfBirth: Date?,
     val token: String?,
     val license: License?,
-    val admin: Boolean = false
+    val admin: Boolean? = false
 ) {
 }
