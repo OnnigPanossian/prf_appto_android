@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/main_color"
-            android:layout_marginTop="180dp"
+            android:layout_marginTop="160dp"
             android:text="Create Account"
             android:layout_gravity="center"/>
 
