@@ -1,11 +1,11 @@
-package com.example.appto
+package com.example.appto.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.appto.databinding.ActivityRegisterBinding
 
 
-class Registro : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
 

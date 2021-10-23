@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.appto.Vehicle
+import com.example.appto.models.Vehicle
 import com.example.appto.services.vehicleService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class VehicleViewModel: ViewModel() {
+class VehicleViewModel : ViewModel() {
 
     private var _vehicleList = MutableLiveData<MutableList<Vehicle>>()
     val vehicleList: LiveData<MutableList<Vehicle>>

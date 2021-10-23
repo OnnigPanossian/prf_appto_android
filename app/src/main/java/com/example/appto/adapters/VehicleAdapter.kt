@@ -3,14 +3,15 @@ package com.example.appto.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.appto.Vehicle
 import com.example.appto.databinding.VehicleListItemBinding
+import com.example.appto.models.Vehicle
 
 class VehicleAdapter(private val vList: List<Vehicle>) :
     RecyclerView.Adapter<VehicleAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = VehicleListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            VehicleListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ViewHolder(binding)
     }

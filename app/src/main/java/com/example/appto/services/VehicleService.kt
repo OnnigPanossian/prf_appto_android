@@ -1,7 +1,7 @@
 package com.example.appto.services
 
-import com.example.appto.Vehicle
 import com.example.appto.clients.Retrofit.Companion.restClient
+import com.example.appto.models.Vehicle
 import retrofit2.http.GET
 import retrofit2.http.Path
 

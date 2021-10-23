@@ -1,4 +1,4 @@
-package com.example.appto
+package com.example.appto.activities
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -7,14 +7,15 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.location.Location
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.appto.R
 import com.example.appto.databinding.ActivityMapsBinding
+import com.example.appto.models.Parking
 import com.google.android.gms.location.LocationServices
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
