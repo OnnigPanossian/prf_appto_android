@@ -1,13 +1,15 @@
 package com.example.appto.services
 
+import android.util.Log
 import com.example.appto.clients.Retrofit
 import com.example.appto.models.User
+import okhttp3.Call
 import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface UserService {
     @POST("users")
-    suspend fun register(@Body user: RequestBody): User
+    fun register(@Body user: User): User
 
     @POST("users/login")
     suspend fun login(@Body user: User): User

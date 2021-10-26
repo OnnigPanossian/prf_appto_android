@@ -73,6 +73,16 @@
                     android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/createAccount_log"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/white"
+                android:text="Create new account"
+                android:textColor="@color/main_color" />
+
             <Button
                 android:id="@+id/button_log"
                 android:layout_width="wrap_content"
@@ -91,16 +101,6 @@
                 android:layout_marginTop="10dp"
                 android:text="Don't have an account yet?"
                 android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/createAccount_log"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="@color/white"
-                android:text="Create new account"
-                android:textColor="@color/main_color" />
 
         </LinearLayout>
 
