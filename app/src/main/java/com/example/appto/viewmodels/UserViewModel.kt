@@ -19,6 +19,7 @@ class UserViewModel : ViewModel() {
 
     fun register(email: String, password: String): Boolean {
 
+
         val userRequest = User(null, null, password, email, null, null, null, null, null)
 
         viewModelScope.launch {
@@ -29,8 +30,6 @@ class UserViewModel : ViewModel() {
             }
 
         }
-
-
 
         Log.i("User: ", this.user.value.toString())
         return _user.value != null
@@ -46,5 +45,6 @@ class UserViewModel : ViewModel() {
                 Log.d("error", err.message.toString() + err.localizedMessage.toString() + err.cause.toString())
             }
        return user;
+
     }
 }

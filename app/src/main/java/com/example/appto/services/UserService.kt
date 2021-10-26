@@ -3,7 +3,6 @@ package com.example.appto.services
 import android.util.Log
 import com.example.appto.clients.Retrofit
 import com.example.appto.models.User
-import okhttp3.Call
 import okhttp3.RequestBody
 import retrofit2.http.*
 
