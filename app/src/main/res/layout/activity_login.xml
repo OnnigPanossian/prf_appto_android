@@ -94,6 +94,7 @@
                 android:text="Don't have an account yet?"
                 android:textColor="@color/black" />
 
+          
             <TextView
                 android:id="@+id/createAccount_log"
                 android:layout_width="wrap_content"

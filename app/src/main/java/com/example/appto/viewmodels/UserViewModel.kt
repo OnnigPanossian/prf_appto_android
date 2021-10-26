@@ -10,8 +10,6 @@ import com.example.appto.services.userService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.MediaType
-import okhttp3.RequestBody
 
 class UserViewModel : ViewModel() {
 
@@ -20,16 +18,33 @@ class UserViewModel : ViewModel() {
         get() = _user
 
     fun register(email: String, password: String): Boolean {
+
+
         val userRequest = User(null, null, password, email, null, null, null, null, null)
-        Log.i("Matias: ", userRequest.toString())
+
         viewModelScope.launch {
-            Log.i("Matias: ", "5")
+
             _user.value = withContext(Dispatchers.IO) {
-                Log.i("Matias: ", "6")
-                userService.register(RequestBody.create(MediaType.parse("application/json"), userRequest.toString()))
+
+                registerUser(userRequest)
             }
+
         }
+
         Log.i("User: ", this.user.value.toString())
         return _user.value != null
+    }
+    private fun registerUser (userRequest: User) : User?{
+            var user : User? = null;
+        try{
+
+            user = userService.register(userRequest)
+            }
+            catch (err: Exception)
+            {
+                Log.d("error", err.message.toString() + err.localizedMessage.toString() + err.cause.toString())
+            }
+       return user;
+
     }
 }
