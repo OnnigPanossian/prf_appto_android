@@ -3,6 +3,8 @@ package com.example.appto.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.appto.databinding.ActivityRegisterBinding
@@ -19,34 +21,52 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setLoginRedirectEvent()
+        supportActionBar?.hide()
 
-        Log.i("Matias: ", "1")
+        setLoginRedirectListener()
+
         userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
         binding.buttonReg.setOnClickListener {
-            Log.i("Matias: ", "2")
-            var userEmail = binding.inputMailReg.text.toString()
-            var userPass = binding.inputPassReg.text.toString()
+            val userEmail = binding.inputMailReg.text.toString()
+            val userPass = binding.inputPassReg.text.toString()
 
-            validateInputs()
+            val validInputs = validateInputs(userEmail, userPass)
 
-            val ok: Boolean = userViewModel.register(userEmail, userPass)
-            if(ok) {
-                Log.i("Matias: ", "3")
-                // todo peola
-            } else {
-                Log.i("Matias: ", "4")
-                // mostrar toast
+            if (validInputs) {
+                val ok: Boolean = userViewModel.register(userEmail, userPass)
+
+                if (ok) {
+                    Log.i("Matias: ", "3")
+                    // todo peola
+                    startActivity(Intent(this, LoginActivity::class.java))
+                } else {
+                    Log.i("Matias: ", "4")
+                    Toast.makeText(this, "Ocurrió un error al crear la cuenta", Toast.LENGTH_LONG).show()
+                }
             }
         }
     }
 
-    private fun validateInputs() {
-        // TODO("Not yet implemented")
+    private fun validateInputs(email: String, pass: String): Boolean {
+        var isEmailValid = true
+        var isPasswordValid = true
+        binding.emailReg.error = null
+        binding.passReg.error = null
+        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            isEmailValid = false;
+            binding.emailReg.error = "Formato de email inválido"
+        }
+
+        if (pass.isEmpty() || pass.length < 8) {
+            isPasswordValid = false
+            binding.passReg.error = "La contraseña debe contener al menos 8 caracteres"
+        }
+
+        return isEmailValid && isPasswordValid
     }
 
-    private fun setLoginRedirectEvent() {
+    private fun setLoginRedirectListener() {
         binding.loginReg.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
