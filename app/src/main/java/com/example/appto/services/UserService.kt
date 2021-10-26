@@ -2,11 +2,12 @@ package com.example.appto.services
 
 import com.example.appto.clients.Retrofit
 import com.example.appto.models.User
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface UserService {
     @POST("users")
-    suspend fun register(@Body user: User): User
+    suspend fun register(@Body user: RequestBody): User
 
     @POST("users/login")
     suspend fun login(@Body user: User): User
