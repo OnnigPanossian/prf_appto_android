@@ -33,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
             val validInputs = validateInputs(userEmail, userPass)
 
             if (validInputs) {
-                // val ok: Boolean = userViewModel.register(userEmail, userPass)
+                val ok: Boolean = userViewModel.login(userEmail, userPass)
 
                 if (true) {
                     startActivity(Intent(this, MapsActivity::class.java))
