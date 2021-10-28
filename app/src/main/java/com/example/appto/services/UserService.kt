@@ -11,7 +11,7 @@ interface UserService {
     fun register(@Body user: User): User
 
     @POST("users/login")
-    suspend fun login(@Body user: User): User
+    fun login(@Body user: User): User
 
     @POST("users/logout")
     suspend fun logout(@Header("Authorization") token: String): Void

@@ -18,33 +18,52 @@ class UserViewModel : ViewModel() {
         get() = _user
 
     fun register(email: String, password: String): Boolean {
-
-
         val userRequest = User(null, null, password, email, null, null, null, null, null)
 
         viewModelScope.launch {
-
             _user.value = withContext(Dispatchers.IO) {
-
                 registerUser(userRequest)
             }
-
         }
-
         Log.i("User: ", this.user.value.toString())
         return _user.value != null
     }
-    private fun registerUser (userRequest: User) : User?{
-            var user : User? = null;
-        try{
 
+    fun login(email: String, password: String): Boolean {
+        val userRequest = User(null, null, password, email, null, null, null, null, null)
+
+        viewModelScope.launch {
+            _user.value = withContext(Dispatchers.IO) {
+                loginUser(userRequest)
+            }
+        }
+        Log.i("User: ", this.user.value.toString())
+        return _user.value != null
+    }
+
+    private fun loginUser(userRequest: User): User? {
+        var user: User? = null;
+        try {
+            user = userService.login(userRequest)
+        } catch (err: Exception) {
+            Log.d(
+                "error",
+                err.message.toString() + err.localizedMessage.toString() + err.cause.toString()
+            )
+        }
+        return user;
+    }
+
+    private fun registerUser(userRequest: User): User? {
+        var user: User? = null;
+        try {
             user = userService.register(userRequest)
-            }
-            catch (err: Exception)
-            {
-                Log.d("error", err.message.toString() + err.localizedMessage.toString() + err.cause.toString())
-            }
-       return user;
-
+        } catch (err: Exception) {
+            Log.d(
+                "error",
+                err.message.toString() + err.localizedMessage.toString() + err.cause.toString()
+            )
+        }
+        return user;
     }
 }

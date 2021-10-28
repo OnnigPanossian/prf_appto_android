@@ -81,6 +81,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="90dp"
+                android:width="180dp"
+                android:height="55dp"
                 android:backgroundTint="@color/main_color"
                 android:text="Login" />
 

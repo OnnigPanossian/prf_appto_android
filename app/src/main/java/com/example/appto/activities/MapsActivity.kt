@@ -140,7 +140,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     // Transforms a drawable into a bitmap
     private fun getIcon(): BitmapDescriptor {
-        val drawable = ContextCompat.getDrawable(this, R.drawable.ic_car_parking)
+        val drawable = ContextCompat.getDrawable(this, R.drawable.ic_parking)
         drawable?.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
         val bitmap = Bitmap.createBitmap(
             drawable?.intrinsicWidth ?: 0,
