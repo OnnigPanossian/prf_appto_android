@@ -49,16 +49,16 @@ class LoginActivity : AppCompatActivity() {
     private fun validateInputs(email: String, pass: String): Boolean {
         var isEmailValid = true
         var isPasswordValid = true
-        binding.inputPassLog.error = null
-        binding.inputMailLog.error = null
+        binding.passLog.error = null
+        binding.emailLog.error = null
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             isEmailValid = false;
-            binding.inputMailLog.error = "Formato de email inválido"
+            binding.emailLog.error = "Formato de email inválido"
         }
 
         if (pass.isEmpty()) {
             isPasswordValid = false
-            binding.inputPassLog.error = "Debes ingresar la contraseña"
+            binding.passLog.error = "Debes ingresar la contraseña"
         }
 
         return isEmailValid && isPasswordValid
