@@ -10,11 +10,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="AppTo"
         android:textColor="@color/black"
-        android:textStyle="bold"
         android:textSize="45sp"
-        android:gravity="center"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/SplashScreenImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -1,28 +1,30 @@
-package com.example.appto.activities
+package com.example.appto.fragments
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.appto.databinding.ActivityLoginBinding
+import androidx.navigation.findNavController
+import com.example.appto.R
+import com.example.appto.databinding.FragmentLoginBinding
 import com.example.appto.viewmodels.UserViewModel
 
-class LoginActivity : AppCompatActivity() {
+class LoginFragment : Fragment() {
 
-    private lateinit var binding: ActivityLoginBinding
+    private lateinit var binding: FragmentLoginBinding
     private lateinit var userViewModel: UserViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
 
-        supportActionBar?.hide()
-
-        setRegisterRedirectEvent()
+        binding = FragmentLoginBinding.inflate(layoutInflater)
 
         userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
@@ -36,14 +38,19 @@ class LoginActivity : AppCompatActivity() {
                 val ok: Boolean = userViewModel.login(userEmail, userPass)
 
                 if (true) {
-                    startActivity(Intent(this, MapsActivity::class.java))
+
                 } else {
-                    Log.i("Matias: ", "4")
-                    Toast.makeText(this, "Datos de usuario inválidos", Toast.LENGTH_LONG)
+                    Toast.makeText(activity, "Datos de usuario inválidos", Toast.LENGTH_LONG)
                         .show()
                 }
             }
         }
+
+        binding.createAccountLog.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+
+        return binding.root
     }
 
     private fun validateInputs(email: String, pass: String): Boolean {
@@ -62,12 +69,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
         return isEmailValid && isPasswordValid
-    }
-
-    private fun setRegisterRedirectEvent() {
-        binding.createAccountLog.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
-        }
     }
 
 }

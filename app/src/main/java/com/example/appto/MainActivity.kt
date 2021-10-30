@@ -1,9 +1,8 @@
 package com.example.appto
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.appto.activities.LoginActivity
+import androidx.fragment.app.FragmentActivity
 import com.example.appto.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -15,9 +14,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
-
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
     }
 
 }
