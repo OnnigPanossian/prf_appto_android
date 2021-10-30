@@ -1,29 +1,28 @@
-package com.example.appto.activities
+package com.example.appto.fragments
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.appto.databinding.ActivityRegisterBinding
+import androidx.navigation.findNavController
+import com.example.appto.R
+import com.example.appto.databinding.FragmentRegisterBinding
+
 import com.example.appto.viewmodels.UserViewModel
 
+class RegisterFragment : Fragment() {
 
-class RegisterActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityRegisterBinding
+    private lateinit var binding: FragmentRegisterBinding
     private lateinit var userViewModel: UserViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        supportActionBar?.hide()
-
-        setLoginRedirectListener()
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentRegisterBinding.inflate(layoutInflater)
 
         userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
@@ -37,15 +36,22 @@ class RegisterActivity : AppCompatActivity() {
                 val ok: Boolean = userViewModel.register(userEmail, userPass)
 
                 if (ok) {
-                    Log.i("Matias: ", "3")
-                    // todo peola
-                    startActivity(Intent(this, LoginActivity::class.java))
+
                 } else {
-                    Log.i("Matias: ", "4")
-                    Toast.makeText(this, "Ocurrió un error al crear la cuenta", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        activity,
+                        "Ocurrió un error al crear la cuenta",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }
+
+        binding.loginReg.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.action_registerFragment_to_loginFragment2)
+        }
+
+        return binding.root
     }
 
     private fun validateInputs(email: String, pass: String): Boolean {
@@ -64,12 +70,6 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         return isEmailValid && isPasswordValid
-    }
-
-    private fun setLoginRedirectListener() {
-        binding.loginReg.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
-        }
     }
 
 }

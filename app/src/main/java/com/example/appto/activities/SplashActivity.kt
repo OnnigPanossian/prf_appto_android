@@ -1,10 +1,11 @@
-package com.example.appto
+package com.example.appto.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.view.WindowManager
+import com.example.appto.MainActivity
+import com.example.appto.R
 
 @Suppress("DEPRECATION")
 class SplashActivity : AppCompatActivity() {
@@ -13,19 +14,12 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         supportActionBar?.hide()
 
-        // This is used to hide the status bar and make
-        // the splash screen as a full screen activity.
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
-
         // we used the postDelayed(Runnable, time) method
         // to send a message with a delayed time.
         Handler().postDelayed({
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-        }, 4000) // 3000 is the delayed time in milliseconds.
+        }, 4000)
     }
 }

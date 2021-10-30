@@ -1,24 +1,27 @@
-package com.example.appto.activities
+package com.example.appto.fragments
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appto.adapters.VehicleAdapter
-import com.example.appto.databinding.ActivityVehicleListBinding
+import com.example.appto.databinding.FragmentVehicleListBinding
 import com.example.appto.viewmodels.VehicleViewModel
 
-class VehicleListActivity : AppCompatActivity() {
+class VehicleListFragment : Fragment() {
 
-    private lateinit var binding: ActivityVehicleListBinding
+    private lateinit var binding: FragmentVehicleListBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityVehicleListBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentVehicleListBinding.inflate(layoutInflater)
 
-        binding.vlRecycler.layoutManager = LinearLayoutManager(this)
+        binding.vlRecycler.layoutManager = LinearLayoutManager(activity)
         val vehicleViewModel = ViewModelProvider(this)[VehicleViewModel::class.java]
 
         vehicleViewModel.vehicleList.observe(this, { vehicleList ->
@@ -31,5 +34,6 @@ class VehicleListActivity : AppCompatActivity() {
                 }
             }
         })
+        return binding.root
     }
 }
