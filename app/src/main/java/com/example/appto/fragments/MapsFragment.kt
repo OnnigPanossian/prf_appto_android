@@ -150,6 +150,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         val user = LatLng(userLocation.latitude, userLocation.longitude)
         mMap.addMarker(MarkerOptions().position(user).title("Buenos Aires"))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user, 12.0F))
+
+        mMap.uiSettings.isZoomControlsEnabled = true;
     }
 
 

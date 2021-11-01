@@ -37,13 +37,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MapsActivity"
-            android:exported="true"
-            android:label="@string/title_activity_maps" />
-        <activity
-            android:name=".activities.VehicleListActivity"
-            android:exported="true" />
-        <activity
             android:name=".MainActivity"
             android:exported="true" >
         </activity>
