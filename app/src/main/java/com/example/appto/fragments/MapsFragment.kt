@@ -18,9 +18,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.appto.R
 import com.example.appto.databinding.FragmentMapsBinding
 import com.example.appto.models.Parking
+import com.example.appto.viewmodels.ParkingViewModel
+import com.example.appto.viewmodels.UserViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -47,9 +50,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     ): View {
         binding = FragmentMapsBinding.inflate(layoutInflater)
 
+        val parkingViewModel = ViewModelProvider(this)[ParkingViewModel::class.java]
+        parkings = parkingViewModel.parkings.value!!
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(context!!)
 
-        showAvailableParkings()
         requestLocationPermission()
         return binding.root
     }
@@ -120,16 +125,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             }
         dialog.show()
     }
-
-    private fun showAvailableParkings() {
-        // TODO: TOMAR DESDE EL BACKEND
-        parkings.add(Parking("Alcorta", -34.601199723075204, -58.39422029816545, null))
-        parkings.add(Parking("Bombonera Parking", -34.599910362624726, -58.40408009840915, null))
-        parkings.add(Parking("Cordoba Garage", -34.620283237399164, -58.4576767673698, null))
-        parkings.add(Parking("Tilin & Co.", -34.551363857592044, -58.54742150278589, null))
-        parkings.add(Parking("Le cuidamos su carro", -34.544272198662625, -58.46639946081241, null))
-    }
-
 
     /**
      * Manipulates the map once available.

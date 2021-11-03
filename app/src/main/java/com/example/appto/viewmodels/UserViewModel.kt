@@ -23,7 +23,7 @@ class UserViewModel : ViewModel() {
         viewModelScope.launch {
             _user.value = withContext(Dispatchers.IO) {
                 registerUser(userRequest)
-            }
+            }!!
         }
         Log.i("User: ", this.user.value.toString())
         return _user.value != null
@@ -35,7 +35,7 @@ class UserViewModel : ViewModel() {
         viewModelScope.launch {
             _user.value = withContext(Dispatchers.IO) {
                 loginUser(userRequest)
-            }
+            }!!
         }
         Log.i("User: ", this.user.value.toString())
         return _user.value != null

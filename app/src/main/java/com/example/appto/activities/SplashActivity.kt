@@ -14,8 +14,6 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         supportActionBar?.hide()
 
-        // we used the postDelayed(Runnable, time) method
-        // to send a message with a delayed time.
         Handler().postDelayed({
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
