@@ -23,7 +23,6 @@ import com.example.appto.R
 import com.example.appto.databinding.FragmentMapsBinding
 import com.example.appto.models.Parking
 import com.example.appto.viewmodels.ParkingViewModel
-import com.example.appto.viewmodels.UserViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -49,9 +48,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMapsBinding.inflate(layoutInflater)
-
-        val parkingViewModel = ViewModelProvider(this)[ParkingViewModel::class.java]
-        parkings = parkingViewModel.parkings.value!!
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(context!!)
 
@@ -138,10 +134,16 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         mMap = googleMap
 
         val icon = getIcon()
-        parkings.forEach { p ->
-            val position = LatLng(p.lat, p.long)
-            mMap.addMarker(MarkerOptions().position(position).title(p.name).icon(icon))
-        }
+
+        // Ubicamos cada parking en el mapa de acuerdo a su lat y long
+        val parkingViewModel = ViewModelProvider(this)[ParkingViewModel::class.java]
+        parkingViewModel.parkings.observe(this, { parkings ->
+            parkings.forEach { p ->
+                val position = LatLng(p.lat, p.long)
+                mMap.addMarker(MarkerOptions().position(position).title(p.name).icon(icon))
+            }
+        })
+
         // Add a marker in user Location
         val user = LatLng(userLocation.latitude, userLocation.longitude)
         mMap.addMarker(MarkerOptions().position(user).title("Buenos Aires"))

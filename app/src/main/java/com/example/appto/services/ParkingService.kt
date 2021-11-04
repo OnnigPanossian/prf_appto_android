@@ -6,10 +6,10 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface ParkingService {
-    @GET("parkings")
+    @GET("parking")
     suspend fun getAll(): MutableList<Parking>
 
-    @GET("parkings/{id}")
+    @GET("parking/{id}")
     fun getById(@Path("id") vehicle: String): String
 }
 

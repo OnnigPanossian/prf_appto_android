@@ -1,6 +1,10 @@
 package com.example.appto.models
 
+import com.squareup.moshi.Json
+
 data class Parking(
+    @Json(name = "_id")
+    val id: String,
     val name: String,
     val lat: Double,
     val long: Double,

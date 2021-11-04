@@ -30,7 +30,7 @@ class ParkingViewModel : ViewModel() {
     private suspend fun fetchParkings(): MutableList<Parking> {
         try {
             val parkings = parkingService.getAll()
-                Log.d("Parking: ", parkings.toString())
+                Log.i("Parking: ", parkings.toString())
             return parkings
         } catch (e: Exception) {
             // Mejorar manejo de exceptions

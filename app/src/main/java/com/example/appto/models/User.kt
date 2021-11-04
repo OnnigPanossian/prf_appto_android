@@ -1,7 +1,6 @@
 package com.example.appto.models
 
 import com.squareup.moshi.Json
-import java.util.Date
 
 data class User(
     @field:Json(name = "_id")
@@ -22,7 +21,5 @@ data class User(
     val license: String?,
     @field:Json(name = "admin")
     val admin: String?,
-
-
-) {
+    ) {
 }
