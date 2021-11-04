@@ -10,7 +10,7 @@ interface ParkingService {
     suspend fun getAll(): MutableList<Parking>
 
     @GET("parking/{id}")
-    fun getById(@Path("id") vehicle: String): String
+    fun getById(@Path("id") parking: String): String
 }
 
 val parkingService: ParkingService = Retrofit.restClient.create(ParkingService::class.java)
