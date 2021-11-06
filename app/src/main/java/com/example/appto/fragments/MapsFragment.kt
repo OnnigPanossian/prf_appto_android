@@ -142,7 +142,18 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 val position = LatLng(p.lat, p.long)
                 mMap.addMarker(MarkerOptions().position(position).title(p.name).icon(icon))
             }
+
+            mMap.setOnMarkerClickListener { marker ->
+                val currentParking = parkings.find { p -> p.name == marker.title }
+                ParkingDialogFragment(currentParking!!.name, currentParking.name).show(
+                    childFragmentManager,
+                    "ParkingDialogFragment"
+                )
+                false
+            }
         })
+
+
 
         // Add a marker in user Location
         val user = LatLng(userLocation.latitude, userLocation.longitude)

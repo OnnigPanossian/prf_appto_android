@@ -45,6 +45,7 @@
                 android:layout_marginBottom="10dp"
                 android:ems="10"
                 android:hint="Email *"
+                android:textColorHint="@color/black"
                 android:inputType="textEmailAddress"
                 app:errorEnabled="true"
                 app:startIconDrawable="@drawable/ic_person">

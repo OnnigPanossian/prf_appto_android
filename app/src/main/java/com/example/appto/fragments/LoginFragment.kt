@@ -28,17 +28,18 @@ class LoginFragment : Fragment() {
 
         userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
-        binding.buttonLog.setOnClickListener {
+        binding.buttonLog.setOnClickListener {  view ->
             val userEmail = binding.inputMailLog.text.toString()
             val userPass = binding.inputPassLog.text.toString()
 
             val validInputs = validateInputs(userEmail, userPass)
 
             if (validInputs) {
-                val ok: Boolean = userViewModel.login(userEmail, userPass)
+                // Hay que esperar la respuesta del login antes de redirigir
+                // val ok: Boolean =  userViewModel.login(userEmail, userPass)
 
                 if (true) {
-
+                    view.findNavController().navigate(R.id.action_loginFragment_to_mapsFragment)
                 } else {
                     Toast.makeText(activity, "Datos de usuario inválidos", Toast.LENGTH_LONG)
                         .show()
