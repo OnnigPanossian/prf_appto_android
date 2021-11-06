@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appto.adapters.VehicleAdapter
 import com.example.appto.databinding.FragmentVehicleListBinding
@@ -14,6 +15,7 @@ import com.example.appto.viewmodels.VehicleViewModel
 class VehicleListFragment : Fragment() {
 
     private lateinit var binding: FragmentVehicleListBinding
+    private val args: VehicleListFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,6 +26,7 @@ class VehicleListFragment : Fragment() {
         binding.vlRecycler.layoutManager = LinearLayoutManager(activity)
         val vehicleViewModel = ViewModelProvider(this)[VehicleViewModel::class.java]
 
+        vehicleViewModel.getVehiclesByParkingId(args.parkingId)
         vehicleViewModel.vehicleList.observe(this, { vehicleList ->
             run {
                 binding.vlRecycler.adapter = VehicleAdapter(vehicleList)
