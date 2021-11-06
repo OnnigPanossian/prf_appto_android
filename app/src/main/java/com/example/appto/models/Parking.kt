@@ -3,10 +3,10 @@ package com.example.appto.models
 import com.squareup.moshi.Json
 
 data class Parking(
-    @Json(name = "_id")
+    @field:Json(name = "_id")
     val id: String,
     val name: String,
     val lat: Double,
     val long: Double,
-    var vehicles: List<Vehicle>?
+    // var vehicles: List<Vehicle>?
 )

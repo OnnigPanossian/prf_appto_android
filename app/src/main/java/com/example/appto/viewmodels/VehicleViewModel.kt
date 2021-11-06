@@ -16,19 +16,16 @@ class VehicleViewModel : ViewModel() {
     val vehicleList: LiveData<MutableList<Vehicle>>
         get() = _vehicleList
 
-    init {
-        viewModelScope.launch {
-            val list = withContext(Dispatchers.IO) {
-                val list = fetchVehicles()
-                list
-            }
-            _vehicleList.value = list
-        }
-    }
 
-    private suspend fun fetchVehicles(): MutableList<Vehicle> {
+    fun getVehiclesByParkingId(id: String) {
         try {
-            return vehicleService.getAll()
+            viewModelScope.launch {
+                val list = withContext(Dispatchers.IO) {
+                    val list = vehicleService.getVehiclesByParkingId(id)
+                    list
+                }
+                _vehicleList.value = list
+            }
         } catch (e: Exception) {
             // Mejorar manejo de exceptions
             throw e

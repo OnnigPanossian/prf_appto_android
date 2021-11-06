@@ -9,6 +9,9 @@ interface VehicleService {
     @GET("vehicles")
     suspend fun getAll(): MutableList<Vehicle>
 
+    @GET("parking/{id}/vehicles")
+    suspend fun getVehiclesByParkingId(@Path("id") id: String): MutableList<Vehicle>
+
     @GET("vehicles/{id}")
     fun getById(@Path("id") vehicle: String): String
 }

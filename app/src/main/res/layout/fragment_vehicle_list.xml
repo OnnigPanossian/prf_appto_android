@@ -22,7 +22,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="16dp"
-            android:text="No available vehicles"
+            android:text="No hay vehículos disponibles"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:visibility="gone" />

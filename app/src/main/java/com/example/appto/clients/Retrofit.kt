@@ -6,13 +6,12 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 
 class Retrofit {
-    companion object {
 
+    companion object {
         val restClient: Retrofit = Retrofit.Builder()
             .baseUrl("https://prf-appto.herokuapp.com/api/v1/")
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
-
-
     }
+
 }

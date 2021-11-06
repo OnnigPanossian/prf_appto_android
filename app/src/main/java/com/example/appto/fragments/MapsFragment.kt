@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.location.Geocoder
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
@@ -132,6 +133,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        val geocoder = Geocoder(context)
 
         val icon = getIcon()
 
@@ -142,7 +144,20 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 val position = LatLng(p.lat, p.long)
                 mMap.addMarker(MarkerOptions().position(position).title(p.name).icon(icon))
             }
+
+            mMap.setOnMarkerClickListener { marker ->
+                val currentParking = parkings.find { p -> p.name == marker.title }
+                val dialog = ParkingDialogFragment()
+                val bundle = Bundle()
+                bundle.putString("name", currentParking!!.name)
+                bundle.putString("address", geocoder.getFromLocation(currentParking.lat, currentParking.long, 1)[0].getAddressLine(0).toString())
+                bundle.putString("id", currentParking.id)
+                dialog.arguments = bundle
+                dialog.show(childFragmentManager, "ParkingDialogFragment")
+                true
+            }
         })
+
 
         // Add a marker in user Location
         val user = LatLng(userLocation.latitude, userLocation.longitude)
