@@ -35,9 +35,10 @@ class RegisterFragment : Fragment() {
 
             if (validInputs) {
                 userViewModel.register(userEmail, userPass)
-                setObservers()
             }
         }
+
+        setObservers()
 
         binding.loginReg.setOnClickListener { view ->
             view.findNavController().navigate(R.id.action_registerFragment_to_loginFragment2)

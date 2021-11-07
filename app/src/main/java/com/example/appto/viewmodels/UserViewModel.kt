@@ -25,11 +25,12 @@ class UserViewModel : ViewModel() {
         val userRequest = AuthRequest(email, password)
         var call: Response<User>
 
-        viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
+        viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
             call = userService.register(userRequest)
-            withContext(Dispatchers.IO) {
+            Log.i("REGISTER", "1")
+            withContext(Dispatchers.Main) {
                 if (call.isSuccessful) {
-                    _user.value = call.body()
+                    _user.postValue(call.body())
                 } else {
                     onError("Error : ${call.message()} ")
                 }
@@ -45,7 +46,7 @@ class UserViewModel : ViewModel() {
             call = userService.login(userRequest)
             withContext(Dispatchers.IO) {
                 if (call.isSuccessful) {
-                    _user.value = call.body()
+                    _user.postValue(call.body())
                 } else {
                     onError("Error : ${call.message()} ")
                 }
@@ -54,6 +55,6 @@ class UserViewModel : ViewModel() {
     }
 
     private fun onError(message: String) {
-        errorMessage.value = message
+        errorMessage.postValue(message)
     }
 }

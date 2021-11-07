@@ -1,6 +1,7 @@
 package com.example.appto.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -39,9 +40,10 @@ class LoginFragment : Fragment() {
 
             if (validInputs) {
                 userViewModel.login(email, password)
-                setObservers()
             }
         }
+
+        setObservers()
 
         binding.createAccountLog.setOnClickListener { view ->
             view.findNavController().navigate(R.id.action_loginFragment_to_registerFragment)

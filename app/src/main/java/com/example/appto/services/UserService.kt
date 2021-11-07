@@ -8,10 +8,10 @@ import retrofit2.http.*
 
 interface UserService {
     @POST("users")
-    fun register(@Body user: AuthRequest): Response<User>
+    suspend fun register(@Body user: AuthRequest): Response<User>
 
     @POST("users/login")
-    fun login(@Body user: AuthRequest): Response<User>
+    suspend fun login(@Body user: AuthRequest): Response<User>
 
     @POST("users/logout")
     suspend fun logout(@Header("Authorization") token: String): Void

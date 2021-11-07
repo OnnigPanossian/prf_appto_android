@@ -20,6 +20,5 @@ data class User(
     @field:Json(name = "license")
     val license: String?,
     @field:Json(name = "admin")
-    val admin: String?,
-    ) {
-}
+    val admin: Boolean?,
+)
