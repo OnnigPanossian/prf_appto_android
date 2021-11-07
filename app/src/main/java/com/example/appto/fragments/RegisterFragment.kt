@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.appto.R
 import com.example.appto.databinding.FragmentRegisterBinding
 
@@ -33,25 +34,28 @@ class RegisterFragment : Fragment() {
             val validInputs = validateInputs(userEmail, userPass)
 
             if (validInputs) {
-                val ok: Boolean = userViewModel.register(userEmail, userPass)
-
-                if (ok) {
-
-                } else {
-                    Toast.makeText(
-                        activity,
-                        "Ocurrió un error al crear la cuenta",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
+                userViewModel.register(userEmail, userPass)
             }
         }
+
+        setObservers()
 
         binding.loginReg.setOnClickListener { view ->
             view.findNavController().navigate(R.id.action_registerFragment_to_loginFragment2)
         }
 
         return binding.root
+    }
+
+    private fun setObservers() {
+        userViewModel.user.observe(this, {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment2)
+        })
+
+        userViewModel.errorMessage.observe(this, {
+            Toast.makeText(activity, "Ocurrió un error al crear la cuenta", Toast.LENGTH_LONG)
+                .show()
+        })
     }
 
     private fun validateInputs(email: String, pass: String): Boolean {

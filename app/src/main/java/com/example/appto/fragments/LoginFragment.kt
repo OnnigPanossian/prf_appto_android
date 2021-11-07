@@ -1,6 +1,7 @@
 package com.example.appto.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -9,14 +10,17 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.appto.R
 import com.example.appto.databinding.FragmentLoginBinding
+import com.example.appto.session.SessionManager
 import com.example.appto.viewmodels.UserViewModel
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private lateinit var userViewModel: UserViewModel
+    private lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,34 +28,39 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+        sessionManager = SessionManager(context!!)
         binding = FragmentLoginBinding.inflate(layoutInflater)
-
         userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
-        binding.buttonLog.setOnClickListener {  view ->
-            val userEmail = binding.inputMailLog.text.toString()
-            val userPass = binding.inputPassLog.text.toString()
+        binding.buttonLog.setOnClickListener { view ->
+            val email = binding.inputMailLog.text.toString()
+            val password = binding.inputPassLog.text.toString()
 
-            val validInputs = validateInputs(userEmail, userPass)
+            val validInputs = validateInputs(email, password)
 
             if (validInputs) {
-                // Hay que esperar la respuesta del login antes de redirigir
-                // val ok: Boolean =  userViewModel.login(userEmail, userPass)
-
-                if (true) {
-                    view.findNavController().navigate(R.id.action_loginFragment_to_mapsFragment)
-                } else {
-                    Toast.makeText(activity, "Datos de usuario inválidos", Toast.LENGTH_LONG)
-                        .show()
-                }
+                userViewModel.login(email, password)
             }
         }
+
+        setObservers()
 
         binding.createAccountLog.setOnClickListener { view ->
             view.findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
         return binding.root
+    }
+
+    private fun setObservers() {
+        userViewModel.user.observe(this, {
+            findNavController().navigate(R.id.action_loginFragment_to_mapsFragment)
+            sessionManager.saveAuthToken(userViewModel.user.value!!.token.toString())
+        })
+
+        userViewModel.errorMessage.observe(this, {
+            Toast.makeText(activity, "Credenciales inválidas", Toast.LENGTH_LONG).show()
+        })
     }
 
     private fun validateInputs(email: String, pass: String): Boolean {

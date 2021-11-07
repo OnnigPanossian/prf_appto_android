@@ -3,8 +3,6 @@ package com.example.appto.clients
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-
-
 class Retrofit {
 
     companion object {
