@@ -1,69 +1,59 @@
 package com.example.appto.viewmodels
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.appto.models.AuthRequest
 import com.example.appto.models.User
 import com.example.appto.services.userService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
+import retrofit2.Response
 
 class UserViewModel : ViewModel() {
 
-    private var _user = MutableLiveData<User>()
-    val user: LiveData<User>
+    private var _user = MutableLiveData<User?>()
+    val user: MutableLiveData<User?>
         get() = _user
 
-    fun register(email: String, password: String): Boolean {
-        val userRequest = User(null, null, password, email, null, null, null, null, null)
-
-        viewModelScope.launch {
-            _user.value = withContext(Dispatchers.IO) {
-                registerUser(userRequest)
-            }!!
-        }
-        Log.i("User: ", this.user.value.toString())
-        return _user.value != null
+    val errorMessage = MutableLiveData<String>()
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        onError("Exception handled: ${throwable.localizedMessage}")
     }
 
-    fun login(email: String, password: String): Boolean {
-        val userRequest = User(null, null, password, email, null, null, null, null, null)
+    fun register(email: String, password: String) {
+        val userRequest = AuthRequest(email, password)
+        var call: Response<User>
 
-        viewModelScope.launch {
-            _user.value = withContext(Dispatchers.IO) {
-                loginUser(userRequest)
-            }!!
+        viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
+            call = userService.register(userRequest)
+            withContext(Dispatchers.IO) {
+                if (call.isSuccessful) {
+                    _user.value = call.body()
+                } else {
+                    onError("Error : ${call.message()} ")
+                }
+            }
         }
-        Log.i("User: ", this.user.value.toString())
-        return _user.value != null
     }
 
-    private fun loginUser(userRequest: User): User? {
-        var user: User? = null;
-        try {
-            user = userService.login(userRequest)
-        } catch (err: Exception) {
-            Log.d(
-                "error",
-                err.message.toString() + err.localizedMessage.toString() + err.cause.toString()
-            )
+    fun login(email: String, password: String) {
+        val userRequest = AuthRequest(email, password)
+        var call: Response<User>
+
+        viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
+            call = userService.login(userRequest)
+            withContext(Dispatchers.IO) {
+                if (call.isSuccessful) {
+                    _user.value = call.body()
+                } else {
+                    onError("Error : ${call.message()} ")
+                }
+            }
         }
-        return user;
     }
 
-    private fun registerUser(userRequest: User): User? {
-        var user: User? = null;
-        try {
-            user = userService.register(userRequest)
-        } catch (err: Exception) {
-            Log.d(
-                "error",
-                err.message.toString() + err.localizedMessage.toString() + err.cause.toString()
-            )
-        }
-        return user;
+    private fun onError(message: String) {
+        errorMessage.value = message
     }
 }

@@ -33,17 +33,14 @@ class RegisterFragment : Fragment() {
             val validInputs = validateInputs(userEmail, userPass)
 
             if (validInputs) {
-                val ok: Boolean = userViewModel.register(userEmail, userPass)
+                userViewModel.register(userEmail, userPass)
 
-                if (ok) {
 
-                } else {
                     Toast.makeText(
                         activity,
                         "Ocurrió un error al crear la cuenta",
                         Toast.LENGTH_LONG
                     ).show()
-                }
             }
         }
 
