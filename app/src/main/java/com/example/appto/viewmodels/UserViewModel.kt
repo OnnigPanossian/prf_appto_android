@@ -6,7 +6,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.appto.models.AuthRequest
 import com.example.appto.models.User
 import com.example.appto.services.userService
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class UserViewModel : ViewModel() {

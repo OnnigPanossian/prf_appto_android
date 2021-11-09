@@ -168,7 +168,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                     currentParking.long,
                     results
                 )
-                bundle.putString("distance", "${"Estás a " + String.format("%.2f", results[0] / 1000)} kms de distancia")
+                bundle.putString(
+                    "distance",
+                    "${"Estás a " + String.format("%.2f", results[0] / 1000)} kms de distancia"
+                )
 
                 bundle.putString("id", currentParking.id)
                 dialog.arguments = bundle
