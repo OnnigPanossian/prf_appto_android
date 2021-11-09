@@ -1,7 +1,7 @@
 package com.example.appto.models
 
 import com.squareup.moshi.Json
-import java.util.Date
+import java.util.*
 
 data class License(
     @Json(name = "_id")

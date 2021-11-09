@@ -27,6 +27,7 @@ class ParkingDialogFragment : DialogFragment() {
             binding = ParkingDialogBinding.inflate(layoutInflater)
             binding.tvDialog.text = arguments?.getString("name")
             binding.etAddress.hint = arguments?.getString("address")
+            binding.etVehicles.text = arguments?.getString("distance")
             // Inflate and set the layout for the dialog
             // Pass null as the parent view because its going in the dialog layout
             builder.setView(binding.root)

@@ -1,13 +1,15 @@
 package com.example.appto.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.appto.models.AuthRequest
 import com.example.appto.models.User
 import com.example.appto.services.userService
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class UserViewModel : ViewModel() {
@@ -27,7 +29,6 @@ class UserViewModel : ViewModel() {
 
         viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
             call = userService.register(userRequest)
-            Log.i("REGISTER", "1")
             withContext(Dispatchers.Main) {
                 if (call.isSuccessful) {
                     _user.postValue(call.body())
@@ -47,6 +48,36 @@ class UserViewModel : ViewModel() {
             withContext(Dispatchers.IO) {
                 if (call.isSuccessful) {
                     _user.postValue(call.body())
+                } else {
+                    onError("Error : ${call.message()} ")
+                }
+            }
+        }
+    }
+
+    fun authenticateUser(token: String) {
+        var call: Response<User>
+
+        viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
+            call = userService.getUser(token)
+            withContext(Dispatchers.IO) {
+                if (call.isSuccessful) {
+                    _user.postValue(call.body())
+                } else {
+                    onError("Error : ${call.message()} ")
+                }
+            }
+        }
+    }
+
+    fun logout(token: String) {
+        var call: Response<Void>
+
+        viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
+            call = userService.logout(token)
+            withContext(Dispatchers.IO) {
+                if (call.isSuccessful) {
+                    _user.postValue(null)
                 } else {
                     onError("Error : ${call.message()} ")
                 }

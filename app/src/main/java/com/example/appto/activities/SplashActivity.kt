@@ -1,9 +1,9 @@
 package com.example.appto.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
 import com.example.appto.MainActivity
 import com.example.appto.R
 
@@ -18,6 +18,6 @@ class SplashActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-        }, 4000)
+        }, 3000)
     }
 }

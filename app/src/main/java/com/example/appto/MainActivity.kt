@@ -3,19 +3,26 @@ package com.example.appto
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.navigation.findNavController
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.appto.databinding.ActivityMainBinding
+import com.example.appto.session.SessionManager
+import com.example.appto.viewmodels.UserViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var userViewModel: UserViewModel
+    private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        sessionManager = SessionManager(this)
+        userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
         val drawerLayout = binding.drawerLayout
         binding.imageMenu.setOnClickListener {
@@ -26,11 +33,17 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(binding.navHostFragment.id)
         NavigationUI.setupWithNavController(navigationView, navHostFragment!!.findNavController())
 
-        // Si ponemos iconos .png de colores
-        // navigationView.itemIconTintList = null
+        navigationView.menu.findItem(R.id.menuLogout).setOnMenuItemClickListener {
+            userViewModel.logout("Bearer ${sessionManager.fetchAuthToken().toString()}")
+            true
+        }
+
+        userViewModel.user.observe(this, {
+            navHostFragment.findNavController().navigate(R.id.loginFragment)
+            sessionManager.saveAuthToken(null)
+        })
 
     }
-
 
 
 }

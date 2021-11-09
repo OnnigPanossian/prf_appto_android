@@ -150,7 +150,29 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 val dialog = ParkingDialogFragment()
                 val bundle = Bundle()
                 bundle.putString("name", currentParking!!.name)
-                bundle.putString("address", geocoder.getFromLocation(currentParking.lat, currentParking.long, 1)[0].getAddressLine(0).toString())
+                bundle.putString(
+                    "address",
+                    geocoder.getFromLocation(
+                        currentParking.lat,
+                        currentParking.long,
+                        1
+                    )[0].getAddressLine(0).toString()
+                )
+
+                val results = FloatArray(1)
+
+                Location.distanceBetween(
+                    userLocation.latitude,
+                    userLocation.longitude,
+                    currentParking.lat,
+                    currentParking.long,
+                    results
+                )
+                bundle.putString(
+                    "distance",
+                    "${"Estás a " + String.format("%.2f", results[0] / 1000)} kms de distancia"
+                )
+
                 bundle.putString("id", currentParking.id)
                 dialog.arguments = bundle
                 dialog.show(childFragmentManager, "ParkingDialogFragment")
@@ -161,7 +183,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
         // Add a marker in user Location
         val user = LatLng(userLocation.latitude, userLocation.longitude)
-        mMap.addMarker(MarkerOptions().position(user).title("Buenos Aires"))
+        // mMap.addMarker(MarkerOptions().position(user).title("Buenos Aires"))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user, 12.0F))
 
         if (checkSelfPermission(
