@@ -67,6 +67,21 @@ class UserViewModel : ViewModel() {
         }
     }
 
+    fun logout(token: String) {
+        var call: Response<Void>
+
+        viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
+            call = userService.logout(token)
+            withContext(Dispatchers.IO) {
+                if (call.isSuccessful) {
+                    _user.postValue(null)
+                } else {
+                    onError("Error : ${call.message()} ")
+                }
+            }
+        }
+    }
+
     private fun onError(message: String) {
         errorMessage.postValue(message)
     }
