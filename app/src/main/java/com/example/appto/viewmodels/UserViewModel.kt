@@ -1,6 +1,5 @@
 package com.example.appto.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,7 +26,6 @@ class UserViewModel : ViewModel() {
 
         viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
             call = userService.register(userRequest)
-            Log.i("REGISTER", "1")
             withContext(Dispatchers.Main) {
                 if (call.isSuccessful) {
                     _user.postValue(call.body())
@@ -44,6 +42,21 @@ class UserViewModel : ViewModel() {
 
         viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
             call = userService.login(userRequest)
+            withContext(Dispatchers.IO) {
+                if (call.isSuccessful) {
+                    _user.postValue(call.body())
+                } else {
+                    onError("Error : ${call.message()} ")
+                }
+            }
+        }
+    }
+
+    fun authenticateUser(token: String) {
+        var call: Response<User>
+
+        viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
+            call = userService.getUser(token)
             withContext(Dispatchers.IO) {
                 if (call.isSuccessful) {
                     _user.postValue(call.body())

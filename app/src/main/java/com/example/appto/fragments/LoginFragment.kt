@@ -1,7 +1,6 @@
 package com.example.appto.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -32,7 +31,15 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginBinding.inflate(layoutInflater)
         userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
-        binding.buttonLog.setOnClickListener { view ->
+        setObservers()
+
+        binding.createAccountLog.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+
+        checkToken()
+
+        binding.buttonLog.setOnClickListener {
             val email = binding.inputMailLog.text.toString()
             val password = binding.inputPassLog.text.toString()
 
@@ -41,12 +48,6 @@ class LoginFragment : Fragment() {
             if (validInputs) {
                 userViewModel.login(email, password)
             }
-        }
-
-        setObservers()
-
-        binding.createAccountLog.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
         return binding.root
@@ -79,6 +80,13 @@ class LoginFragment : Fragment() {
         }
 
         return isEmailValid && isPasswordValid
+    }
+
+    private fun checkToken() {
+        val token = sessionManager.fetchAuthToken()
+        if (token != null) {
+            userViewModel.authenticateUser(token)
+        }
     }
 
 }
