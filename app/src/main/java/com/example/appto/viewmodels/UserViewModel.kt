@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.appto.models.AuthRequest
+import com.example.appto.models.UpdateUserRequest
 import com.example.appto.models.User
 import com.example.appto.services.userService
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -55,7 +56,7 @@ class UserViewModel : ViewModel() {
         }
     }
 
-    fun authenticateUser(token: String) {
+    fun getUser(token: String?) {
         var call: Response<User>
 
         viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
@@ -85,7 +86,7 @@ class UserViewModel : ViewModel() {
         }
     }
 
-    fun updateUser(token: String, userData: User) {
+    fun updateUser(token: String?, userData: UpdateUserRequest) {
         var call: Response<User>
 
         viewModelScope.launch(Dispatchers.Main + exceptionHandler) {

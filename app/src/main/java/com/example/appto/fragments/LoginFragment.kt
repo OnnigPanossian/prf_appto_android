@@ -85,7 +85,7 @@ class LoginFragment : Fragment() {
     private fun checkToken() {
         val token = sessionManager.fetchAuthToken()
         if (token != null) {
-            userViewModel.authenticateUser(token)
+            userViewModel.getUser(token)
         }
     }
 

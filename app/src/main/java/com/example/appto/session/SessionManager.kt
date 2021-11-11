@@ -13,6 +13,7 @@ class SessionManager(context: Context) {
 
     companion object {
         const val USER_TOKEN = "token"
+        const val USER_EMAIL = "email"
     }
 
     /**
@@ -29,5 +30,21 @@ class SessionManager(context: Context) {
      */
     fun fetchAuthToken(): String? {
         return prefs.getString(USER_TOKEN, null)
+    }
+
+    /**
+     * Function to save user email
+     */
+    fun saveUserEmail(email: String?) {
+        val editor = prefs.edit()
+        editor.putString(USER_EMAIL, email)
+        editor.apply()
+    }
+
+    /**
+     * Function to fetch user email
+     */
+    fun fetchUserEmail(): String? {
+        return prefs.getString(USER_EMAIL, null)
     }
 }
