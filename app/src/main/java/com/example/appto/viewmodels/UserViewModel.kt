@@ -85,6 +85,21 @@ class UserViewModel : ViewModel() {
         }
     }
 
+    fun updateUser(token: String, userData: User) {
+        var call: Response<User>
+
+        viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
+            call = userService.updateUser(token, userData)
+            withContext(Dispatchers.IO) {
+                if (call.isSuccessful) {
+                    _user.postValue(call.body())
+                } else {
+                    onError("Error : ${call.message()} ")
+                }
+            }
+        }
+    }
+
     private fun onError(message: String) {
         errorMessage.postValue(message)
     }

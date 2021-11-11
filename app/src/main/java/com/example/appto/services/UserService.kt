@@ -19,6 +19,9 @@ interface UserService {
     @GET("users/me")
     suspend fun getUser(@Header("Authorization") token: String): Response<User>
 
+    @PATCH("users")
+    suspend fun updateUser(@Header("Authorization") token: String, @Body user: User): Response<User>
+
     @DELETE("users/me")
     suspend fun delete(@Header("Authorization") token: String): Response<Void>
 }
