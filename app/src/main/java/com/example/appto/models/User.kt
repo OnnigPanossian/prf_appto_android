@@ -21,4 +21,6 @@ data class User(
     val license: String?,
     @field:Json(name = "admin")
     val admin: Boolean?,
+    @field:Json(name = "phone")
+    val phone: String?,
 )
