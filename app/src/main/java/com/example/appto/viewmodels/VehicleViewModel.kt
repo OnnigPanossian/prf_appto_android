@@ -31,4 +31,20 @@ class VehicleViewModel : ViewModel() {
             throw e
         }
     }
+
+    fun returnVehicle(parkingId: String) { //TODO: Arreglar el request
+        try {
+            viewModelScope.launch {
+                withContext(Dispatchers.IO) {
+                    //TODO: Request de getRental (enviar token por header)
+                    val rentalId = "617a06b68c60b26818931fda"
+                    val vehicleId = "61649340327d2fd56f4dde6a"
+                    vehicleService.returnVehicle(vehicleId, parkingId)
+                }
+            }
+        } catch (e: Exception) {
+            // Mejorar manejo de exceptions
+            throw e
+        }
+    }
 }
