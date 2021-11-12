@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:gravity="center"
-            android:text="Create Account"
+            android:text="Crear Cuenta"
             android:textAppearance="?attr/textAppearanceHeadline4"
             android:textColor="@color/black"
             android:textStyle="bold" />
@@ -61,7 +61,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password *"
+                android:hint="Contraseña *"
                 app:errorEnabled="true"
                 app:passwordToggleEnabled="true"
                 app:startIconDrawable="@drawable/ic_key">
@@ -76,14 +76,12 @@
 
             <Button
                 android:id="@+id/button_reg"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="90dp"
-                android:width="180dp"
-                android:height="55dp"
                 android:backgroundTint="@color/main_color"
-                android:text="Create Account" />
+                android:text="Aceptar" />
 
             <TextView
                 android:id="@+id/alReady_reg"
@@ -91,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="Already have an account?"
+                android:text="¿Ya tenés una cuenta?"
                 android:textColor="@color/black" />
 
             <TextView
@@ -101,7 +99,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/white"
-                android:text="Login"
+                android:text="¡INICIA SESIÓN"
                 android:textColor="@color/main_color" />
         </LinearLayout>
 

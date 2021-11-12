@@ -51,8 +51,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         binding = FragmentMapsBinding.inflate(layoutInflater)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(context!!)
-
         requestLocationPermission()
+        setupMap()
+
         return binding.root
     }
 
@@ -63,7 +64,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             if (location != null) {
                 userLocation.latitude = location.latitude
                 userLocation.longitude = location.longitude
-                setupMap()
             }
         }
     }
