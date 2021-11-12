@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="main_color">#23A6F0</color>
     <color name="input_color">#F9F9F9</color>
+    <color name="rating_color">#FFFFC107</color>
+
 </resources>
