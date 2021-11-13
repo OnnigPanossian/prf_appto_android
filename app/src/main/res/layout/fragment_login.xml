@@ -1,107 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relative_log"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.LoginFragment">
 
 
-    <RelativeLayout
-        android:id="@+id/relative_log"
+    <TextView
+        android:id="@+id/title_log"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="Iniciar Sesión"
+        android:textAppearance="?attr/textAppearanceHeadline4"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/linear_log"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities.LoginActivity">
+        android:layout_below="@id/title_log"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/title_log"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_log"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:text="Iniciar Sesión"
-            android:textAppearance="?attr/textAppearanceHeadline4"
-            android:textStyle="bold" />
+            android:layout_marginTop="120dp"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="Email *"
+            android:inputType="textEmailAddress"
+            app:errorEnabled="true"
+            app:startIconDrawable="@drawable/ic_person">
 
-        <LinearLayout
-            android:id="@+id/linear_log"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputMail_log"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/pass_log"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/title_log"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="40dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:hint="Contraseña *"
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
+            app:startIconDrawable="@drawable/ic_key">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/email_log"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputPass_log"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="120dp"
-                android:layout_marginBottom="10dp"
-                android:ems="10"
-                android:hint="Email *"
-                android:inputType="textEmailAddress"
-                app:errorEnabled="true"
-                app:startIconDrawable="@drawable/ic_person">
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputMail_log"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/pass_log"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Contraseña *"
-                app:passwordToggleEnabled="true"
-                app:errorEnabled="true"
-                app:startIconDrawable="@drawable/ic_key">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputPass_log"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Button
-                android:id="@+id/button_log"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="90dp"
-                android:backgroundTint="@color/main_color"
-                android:text="Aceptar" />
+        <Button
+            android:id="@+id/button_log"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="90dp"
+            android:backgroundTint="@color/main_color"
+            android:text="Aceptar" />
 
 
-            <TextView
-                android:id="@+id/noAccount_log"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="¿Todavía no tenés una cuenta?" />
+        <TextView
+            android:id="@+id/noAccount_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="¿Todavía no tenés una cuenta?" />
 
 
-            <TextView
-                android:id="@+id/createAccount_log"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="¡REGISTRÁTE!"
-                android:textColor="@color/main_color" />
+        <TextView
+            android:id="@+id/createAccount_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="¡REGISTRÁTE!"
+            android:textColor="@color/main_color" />
 
-        </LinearLayout>
+    </LinearLayout>
 
-    </RelativeLayout>
+</RelativeLayout>
 
-
-</FrameLayout>

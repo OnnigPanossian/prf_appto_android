@@ -41,7 +41,7 @@ class RegisterFragment : Fragment() {
         setObservers()
 
         binding.loginReg.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_registerFragment_to_loginFragment2)
+            view.findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
 
         return binding.root
@@ -49,7 +49,7 @@ class RegisterFragment : Fragment() {
 
     private fun setObservers() {
         userViewModel.user.observe(this, {
-            findNavController().navigate(R.id.action_registerFragment_to_loginFragment2)
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         })
 
         userViewModel.errorMessage.observe(this, {

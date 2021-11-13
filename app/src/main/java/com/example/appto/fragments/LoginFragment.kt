@@ -1,5 +1,6 @@
 package com.example.appto.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.appto.MainActivity
 import com.example.appto.R
 import com.example.appto.databinding.FragmentLoginBinding
 import com.example.appto.session.SessionManager
@@ -37,8 +39,6 @@ class LoginFragment : Fragment() {
             view.findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
-        checkToken()
-
         binding.buttonLog.setOnClickListener {
             val email = binding.inputMailLog.text.toString()
             val password = binding.inputPassLog.text.toString()
@@ -54,9 +54,11 @@ class LoginFragment : Fragment() {
     }
 
     private fun setObservers() {
-        userViewModel.user.observe(this, {
-            findNavController().navigate(R.id.action_loginFragment_to_mapsFragment)
-            sessionManager.saveAuthToken(userViewModel.user.value!!.token.toString())
+        userViewModel.user.observe(this, { user ->
+            if (user != null) {
+                sessionManager.saveAuthToken(userViewModel.user.value!!.token.toString())
+                startActivity(Intent(activity, MainActivity::class.java))
+            }
         })
 
         userViewModel.errorMessage.observe(this, {
@@ -82,11 +84,5 @@ class LoginFragment : Fragment() {
         return isEmailValid && isPasswordValid
     }
 
-    private fun checkToken() {
-        val token = sessionManager.fetchAuthToken()
-        if (token != null) {
-            userViewModel.getUser(token)
-        }
-    }
 
 }
