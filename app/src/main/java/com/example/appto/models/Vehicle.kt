@@ -7,7 +7,7 @@ data class Vehicle(
     val brand: String,
     val model: String,
     val year: Int,
-    val category: String?,
+    val category: Category?,
     var rating: Float = 0F,
     var timesRated: Int = 0
 )

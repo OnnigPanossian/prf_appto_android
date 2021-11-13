@@ -1,4 +1,4 @@
-package com.example.appto
+package com.example.appto.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,7 @@ import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.example.appto.activities.AuthActivity
+import com.example.appto.R
 import com.example.appto.databinding.ActivityMainBinding
 import com.example.appto.session.SessionManager
 import com.example.appto.viewmodels.UserViewModel
