@@ -3,23 +3,25 @@ package com.example.appto.adapters
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appto.R
 import com.example.appto.databinding.VehicleListItemBinding
 import com.example.appto.models.Vehicle
 import com.example.appto.services.vehicleService
+import com.example.appto.session.SessionManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class VehicleAdapter(private val vList: List<Vehicle>) :
     RecyclerView.Adapter<VehicleAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding =
+        return ViewHolder(
             VehicleListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
-        return ViewHolder(binding)
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -27,12 +29,12 @@ class VehicleAdapter(private val vList: List<Vehicle>) :
         holder.bind(vehicle)
     }
 
-    override fun getItemCount(): Int {
-        return vList.size
-    }
+    override fun getItemCount(): Int = vList.size
 
     inner class ViewHolder(private val binding: VehicleListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        private val sessionManager = SessionManager(binding.root.context)
 
         fun bind(vehicle: Vehicle) {
             setCategoryImage(vehicle.category?.code)
@@ -54,13 +56,19 @@ class VehicleAdapter(private val vList: List<Vehicle>) :
                 binding.tvYear.text = it
             }
 
-            binding.btnReserve.setOnClickListener {
+
+            binding.btnReserve.setOnClickListener { view ->
                 CoroutineScope(Dispatchers.IO).launch {
-                    val res = vehicleService.book(vehicle.id)
-                    if (res.isSuccessful) {
-                        Log.i("OK", "OK")
-                    } else {
-                        Log.e("ERROR", "Error")
+                    val res = vehicleService.book("Bearer ${sessionManager.fetchAuthToken().toString()}", vehicle.id)
+                    withContext(Dispatchers.Main) {
+                        if (res.isSuccessful) {
+                            Log.i("OK", "OK")
+                            sessionManager.saveRentalInProgress(true)
+                            view.findNavController()
+                                .navigate(R.id.action_vehicleListFragment_to_mapsFragment)
+                        } else {
+                            Log.e("ERROR", "Error")
+                        }
                     }
                 }
             }

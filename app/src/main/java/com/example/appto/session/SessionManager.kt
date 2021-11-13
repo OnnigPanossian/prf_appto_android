@@ -14,6 +14,7 @@ class SessionManager(context: Context) {
     companion object {
         const val USER_TOKEN = "token"
         const val USER_EMAIL = "email"
+        const val RENTAL_IN_PROGRESS = "inProgress"
     }
 
     /**
@@ -46,5 +47,16 @@ class SessionManager(context: Context) {
      */
     fun fetchUserEmail(): String? {
         return prefs.getString(USER_EMAIL, null)
+    }
+
+
+    fun saveRentalInProgress(inProgress: Boolean) {
+        val editor = prefs.edit()
+        editor.putBoolean(RENTAL_IN_PROGRESS, inProgress)
+        editor.apply()
+    }
+
+    fun isRentalInProgress(): Boolean {
+        return prefs.getBoolean(RENTAL_IN_PROGRESS, false)
     }
 }
