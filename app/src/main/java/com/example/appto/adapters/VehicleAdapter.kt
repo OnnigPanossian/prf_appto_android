@@ -1,9 +1,9 @@
 package com.example.appto.adapters
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appto.R
 import com.example.appto.databinding.VehicleListItemBinding
@@ -15,14 +15,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class VehicleAdapter(private val context: Context, private val vList: List<Vehicle>) :
+class VehicleAdapter(private val vList: List<Vehicle>) :
     RecyclerView.Adapter<VehicleAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding =
+        return ViewHolder(
             VehicleListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
-        return ViewHolder(context, binding)
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -30,14 +29,12 @@ class VehicleAdapter(private val context: Context, private val vList: List<Vehic
         holder.bind(vehicle)
     }
 
-    override fun getItemCount(): Int {
-        return vList.size
-    }
+    override fun getItemCount(): Int = vList.size
 
-    inner class ViewHolder(context: Context, private val binding: VehicleListItemBinding) :
+    inner class ViewHolder(private val binding: VehicleListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        private val sessionManager = SessionManager(context)
+        private val sessionManager = SessionManager(binding.root.context)
 
         fun bind(vehicle: Vehicle) {
             setCategoryImage(vehicle.category?.code)
@@ -66,6 +63,9 @@ class VehicleAdapter(private val context: Context, private val vList: List<Vehic
                     withContext(Dispatchers.Main) {
                         if (res.isSuccessful) {
                             Log.i("OK", "OK")
+                            sessionManager.saveRentalInProgress(true)
+                            view.findNavController()
+                                .navigate(R.id.action_vehicleListFragment_to_mapsFragment)
                         } else {
                             Log.e("ERROR", "Error")
                         }

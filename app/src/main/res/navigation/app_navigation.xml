@@ -23,6 +23,9 @@
             android:name="parkingId"
             app:argType="string" />
         <action
+            android:id="@+id/action_vehicleListFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <action
             android:id="@+id/action_vehicleListFragment_to_qualiFragment"
             app:destination="@id/qualiFragment" />
     </fragment>
@@ -35,7 +38,7 @@
         android:id="@+id/qualiFragment"
         android:name="com.example.appto.fragments.QualiFragment"
         android:label="fragment_quali"
-        tools:layout="@layout/fragment_quali" >
+        tools:layout="@layout/fragment_quali">
         <argument
             android:name="vehicleId"
             app:argType="string" />

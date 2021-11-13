@@ -16,10 +16,22 @@ interface VehicleService {
     fun getById(@Path("id") vehicle: String): String
 
     @POST("vehicles/{id}/book")
-    suspend fun book(@Header("Authorization") token: String?, @Path("id") vehicle: String): Response<Void>
+    suspend fun book(
+        @Header("Authorization") token: String?,
+        @Path("id") vehicle: String
+    ): Response<Void>
 
     @PUT("vehicles/{id}/calificate/{rating}")
-    suspend fun qualification(@Path("id") vehicles: String, @Path("rating") rating: Float): Response<Void>
+    suspend fun qualification(
+        @Path("id") vehicles: String,
+        @Path("rating") rating: Float
+    ): Response<Void>
+
+    @POST("vehicles/{id}/return/{parking}")
+    suspend fun returnVehicle(
+        @Path("id") vehicle: String,
+        @Path("parking") parking: String
+    ): Response<Void>
 }
 
 val vehicleService: VehicleService = restClient.create(VehicleService::class.java)
