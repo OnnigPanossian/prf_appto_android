@@ -27,10 +27,10 @@ interface VehicleService {
         @Path("rating") rating: Float
     ): Response<Void>
 
-    @POST("vehicles/{id}/return/{parking}")
+    @POST("vehicles/{id}/return/{idParking}")
     suspend fun returnVehicle(
         @Path("id") vehicle: String,
-        @Path("parking") parking: String
+        @Path("idParking") parking: String
     ): Response<Void>
 }
 

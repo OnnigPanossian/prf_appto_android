@@ -21,7 +21,13 @@ class VehicleViewModel : ViewModel() {
     val vehicleList: LiveData<MutableList<Vehicle>>
         get() = _vehicleList
 
+    private var _rental = MutableLiveData<Rental>()
+    val rental: LiveData<Rental>
+        get() = _rental
+
     val qualiSuccess = MutableLiveData<Boolean>()
+
+    val returnSuccess = MutableLiveData<Boolean>()
 
     val errorMessage = MutableLiveData<String>()
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
@@ -36,7 +42,7 @@ class VehicleViewModel : ViewModel() {
                     val list = vehicleService.getVehiclesByParkingId(id)
                     list
                 }
-                _vehicleList.value = list
+                _vehicleList.postValue(list)
             }
         } catch (e: Exception) {
             // Mejorar manejo de exceptions
@@ -74,34 +80,31 @@ class VehicleViewModel : ViewModel() {
         }
     }
 
-    fun returnVehicle(parkingId: String, token: String) { //TODO: Arreglar el request
-        try {
-            // NO ME ESTÁ HACIENDO EL REQUEST DE RETURN
-            Log.d("RENTAL", "RETURN VEHICLE")
-            var call: Response<Rental>
-            viewModelScope.launch {
-                call = userService.getRental(token)
-                withContext(Dispatchers.IO) {
-                    if (call.isSuccessful) {
-                        Log.d("RENTAL", call.body().toString())
-                    }
+    fun getRental(token: String?) {
+        var call: Response<Rental>
+        viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
+            call = userService.getRental(token)
+            withContext(Dispatchers.IO) {
+                if (call.isSuccessful) {
+                    _rental.postValue(call.body())
+                } else {
+                    Log.i("RENTAL", "RENTAL")
                 }
             }
-            Log.d("RENTAL", "PRE RETURN")
+        }
+    }
 
-            var callVehicleReturn: Response<Void>
-            val vehicleId = "61649340327d2fd56f4dde6a"
-            viewModelScope.launch {
-                callVehicleReturn = vehicleService.returnVehicle(vehicleId, parkingId)
-                withContext(Dispatchers.IO) {
-                    if (callVehicleReturn.isSuccessful) {
-                        Log.d("RENTAL", "OK")
-                    }
+    fun returnVehicle(vehicleId: String, parkingId: String) {
+        var call: Response<Void>
+        viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
+            call = vehicleService.returnVehicle(_rental.value?.vehicle?.id.toString(), parkingId)
+            withContext(Dispatchers.IO) {
+                if (call.isSuccessful) {
+                    returnSuccess.postValue(true)
+                } else {
+                    returnSuccess.postValue(false)
                 }
             }
-        } catch (e: Exception) {
-            // Mejorar manejo de exceptions
-            throw e
         }
     }
 

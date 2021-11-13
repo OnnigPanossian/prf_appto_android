@@ -33,8 +33,6 @@ class QualiFragment : Fragment() {
             vehicleViewModel.qualification(args.vehicleId, binding.ratingBar.rating)
         }
 
-
-
         setObervers()
         return binding.root
     }

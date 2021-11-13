@@ -59,7 +59,7 @@ class VehicleAdapter(private val vList: List<Vehicle>) :
 
             binding.btnReserve.setOnClickListener { view ->
                 CoroutineScope(Dispatchers.IO).launch {
-                    val res = vehicleService.book(sessionManager.fetchAuthToken(), vehicle.id)
+                    val res = vehicleService.book("Bearer ${sessionManager.fetchAuthToken().toString()}", vehicle.id)
                     withContext(Dispatchers.Main) {
                         if (res.isSuccessful) {
                             Log.i("OK", "OK")

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
@@ -47,10 +48,10 @@ class ParkingDialogFragment : DialogFragment() {
                         val action = MapsFragmentDirections.actionMapsFragmentToVehicleListFragment(
                             parkingId
                         )
+                        dialog?.dismiss()
                         findNavController().navigate(action)
                     } else {
-                        vehicleViewModel.returnVehicle(parkingId, sessionManager.fetchAuthToken()!!)
-                        sessionManager.saveRentalInProgress(false)
+                        returnVehicle(parkingId)
                     }
                 }
                 .setNegativeButton("Cancelar") { dialog, _ ->
@@ -61,11 +62,34 @@ class ParkingDialogFragment : DialogFragment() {
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
+    private fun returnVehicle(parkingId: String) {
+        vehicleViewModel.getRental("Bearer ${sessionManager.fetchAuthToken().toString()}")
+
+        vehicleViewModel.rental.observe(this, { rental ->
+            if (rental != null) {
+                vehicleViewModel.returnVehicle(rental.vehicle?.id.toString(), parkingId)
+            }
+        })
+
+        vehicleViewModel.returnSuccess.observe(this, { success ->
+            if (success) {
+                sessionManager.saveRentalInProgress(false)
+                val action = VehicleListFragmentDirections.actionVehicleListFragmentToQualiFragment(
+                    parkingId
+                )
+                dialog?.dismiss()
+                findNavController().navigate(action)
+            } else {
+                Toast.makeText(activity, "Ocurrió un error", Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
     private fun getButtonText(rentalInProgress: Boolean): String {
-        var text = "Ver autos"
-        if (rentalInProgress) {
-            text = "Devolver"
+        return if (rentalInProgress) {
+            "Devolver"
+        } else {
+            "Ver autos"
         }
-        return text
     }
 }
