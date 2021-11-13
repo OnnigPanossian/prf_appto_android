@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_mapsFragment_to_vehicleListFragment"
             app:destination="@id/vehicleListFragment" />
+        <action
+            android:id="@+id/action_mapsFragment_to_qualiFragment"
+            app:destination="@id/qualiFragment" />
     </fragment>
     <fragment
         android:id="@+id/vehicleListFragment"
@@ -40,7 +43,7 @@
         android:label="fragment_quali"
         tools:layout="@layout/fragment_quali">
         <argument
-            android:name="vehicleId"
+            android:name="parkingId"
             app:argType="string" />
         <action
             android:id="@+id/action_qualiFragment_to_mapsFragment"

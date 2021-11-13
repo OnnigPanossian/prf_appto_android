@@ -83,6 +83,7 @@ class VehicleViewModel : ViewModel() {
     fun getRental(token: String?) {
         var call: Response<Rental>
         viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
+            Log.i("POR ACA", token.toString())
             call = userService.getRental(token)
             withContext(Dispatchers.IO) {
                 if (call.isSuccessful) {
@@ -97,7 +98,7 @@ class VehicleViewModel : ViewModel() {
     fun returnVehicle(vehicleId: String, parkingId: String) {
         var call: Response<Void>
         viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
-            call = vehicleService.returnVehicle(_rental.value?.vehicle?.id.toString(), parkingId)
+            call = vehicleService.returnVehicle(vehicleId, parkingId)
             withContext(Dispatchers.IO) {
                 if (call.isSuccessful) {
                     returnSuccess.postValue(true)
