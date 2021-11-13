@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="20dp"
-                android:hint="Completa tu nombre"
+                android:hint="Completá tu nombre"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="20dp"
-                android:hint="Completa tu teléfono"
+                android:hint="Completá tu telefono"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="20dp"
-                android:hint="Ingresa tu número de licencia"
+                android:hint="Ingresá tu número de licencia"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
