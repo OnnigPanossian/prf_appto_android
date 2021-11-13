@@ -24,15 +24,15 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="45dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/profile_avatar"
+                android:src="@drawable/ic_person"
                 app:riv_oval="true" />
 
             <TextView
+                android:id="@+id/txtEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="axelpodostrojec@gmail.com"
                 android:textColor="#fff"
                 android:textSize="21sp"
                 android:textStyle="bold" />

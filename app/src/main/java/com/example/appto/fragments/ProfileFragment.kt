@@ -50,6 +50,7 @@ class ProfileFragment : Fragment() {
     private fun setObservers() {
         userViewModel.user.observe(this, { user ->
             sessionManager.saveUserEmail(userViewModel.user.value!!.email.toString())
+            binding.txtEmail.text = user?.email
             binding.inputName.setText(user?.name)
             binding.inputPhone.setText(user?.phone)
             binding.inputImage.setText(user?.image)
