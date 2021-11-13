@@ -83,7 +83,6 @@ class VehicleViewModel : ViewModel() {
     fun getRental(token: String?) {
         var call: Response<Rental>
         viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
-            Log.i("POR ACA", token.toString())
             call = userService.getRental(token)
             withContext(Dispatchers.IO) {
                 if (call.isSuccessful) {
