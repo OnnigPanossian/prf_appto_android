@@ -35,9 +35,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:text="@string/app_name"
+                android:fontFamily="@font/faster_one"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="30sp" />
 
         </LinearLayout>
 

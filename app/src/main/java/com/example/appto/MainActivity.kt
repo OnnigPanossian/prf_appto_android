@@ -1,11 +1,13 @@
 package com.example.appto
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.example.appto.activities.AuthActivity
 import com.example.appto.databinding.ActivityMainBinding
 import com.example.appto.session.SessionManager
 import com.example.appto.viewmodels.UserViewModel
@@ -19,10 +21,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         sessionManager = SessionManager(this)
         userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+
+        checkToken()
 
         val drawerLayout = binding.drawerLayout
         binding.imageMenu.setOnClickListener {
@@ -38,11 +41,22 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        userViewModel.user.observe(this, {
-            navHostFragment.findNavController().navigate(R.id.loginFragment)
-            sessionManager.saveAuthToken(null)
+        userViewModel.user.observe(this, { user ->
+            if (user == null) {
+                sessionManager.saveAuthToken(null)
+                startActivity(Intent(this, AuthActivity::class.java))
+                finish()
+            }
         })
 
+        setContentView(binding.root)
+    }
+
+    private fun checkToken() {
+        val token = sessionManager.fetchAuthToken()
+        if (token != null) {
+            userViewModel.getUser(token)
+        }
     }
 
 
