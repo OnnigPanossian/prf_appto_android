@@ -3,9 +3,7 @@ package com.example.appto.services
 import com.example.appto.clients.Retrofit.Companion.restClient
 import com.example.appto.models.Vehicle
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface VehicleService {
     @GET("vehicles")
@@ -18,9 +16,9 @@ interface VehicleService {
     fun getById(@Path("id") vehicle: String): String
 
     @POST("vehicles/{id}/book")
-    suspend fun book(@Path("id") vehicle: String): Response<Void>
+    suspend fun book(@Header("Authorization") token: String?, @Path("id") vehicle: String): Response<Void>
 
-    @POST("vehicles/{id}/calificate/{rating}")
+    @PUT("vehicles/{id}/calificate/{rating}")
     suspend fun qualification(@Path("id") vehicles: String, @Path("rating") rating: Float): Response<Void>
 }
 

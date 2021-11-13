@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.appto.databinding.ParkingDialogBinding
 
@@ -37,6 +38,13 @@ class ParkingDialogFragment : DialogFragment() {
                     )
                     dialog!!.dismiss()
                     findNavController().navigate(action)
+                    if(false) {
+                        val action =
+                            VehicleListFragmentDirections.actionVehicleListFragmentToQualiFragment(
+                                vehicle.id
+                            )
+                        view.findNavController().navigate(action)
+                    }
                 }
                 .setNegativeButton("Cancelar") { dialog, _ ->
                     dialog.cancel()

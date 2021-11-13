@@ -56,6 +56,21 @@ class VehicleViewModel : ViewModel() {
         }
     }
 
+    fun book(token: String?, vehicleId: String) {
+        var call: Response<Void>
+
+        viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
+            call = vehicleService.book(token, vehicleId)
+            withContext(Dispatchers.IO) {
+                if (call.isSuccessful) {
+                    qualiSuccess.postValue(true)
+                } else {
+                    qualiSuccess.postValue(false)
+                }
+            }
+        }
+    }
+
     private fun onError(message: String) {
         errorMessage.postValue(message)
     }

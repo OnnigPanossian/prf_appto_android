@@ -29,7 +29,7 @@ class VehicleListFragment : Fragment() {
         vehicleViewModel.getVehiclesByParkingId(args.parkingId)
         vehicleViewModel.vehicleList.observe(this, { vehicleList ->
             run {
-                binding.vlRecycler.adapter = VehicleAdapter(vehicleList)
+                binding.vlRecycler.adapter = VehicleAdapter(context!!, vehicleList)
                 if (vehicleList.isEmpty()) {
                     binding.vlEmptyView.visibility = View.VISIBLE
                 } else {
