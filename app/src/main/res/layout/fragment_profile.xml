@@ -42,7 +42,7 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="360dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="0dp"
@@ -51,8 +51,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="25dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="36dp"
@@ -64,8 +63,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:hint="Completa tu nombre"
                 android:layout_marginStart="20dp"
+                android:hint="Completa tu nombre"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -74,8 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:paddingStart="25dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="36dp"
@@ -87,8 +85,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:hint="Completa tu teléfono"
                 android:layout_marginStart="20dp"
+                android:hint="Completa tu teléfono"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -97,8 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:paddingStart="25dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="36dp"
@@ -110,8 +107,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:hint="Ingresa tu número de licencia"
                 android:layout_marginStart="20dp"
+                android:hint="Ingresa tu número de licencia"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -120,8 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:paddingLeft="25dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="36dp"
@@ -133,21 +129,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:hint="Ingresa una URL de imagen"
                 android:layout_marginStart="20dp"
+                android:hint="Ingresa una URL de imagen"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/profileSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100dp"
+            android:height="60dp"
+            android:text="Guardar"
+            android:textColor="#fff" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/profileSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dp"
-        android:width="200dp"
-        android:height="60dp"
-        android:text="Guardar"
-        android:textColor="#fff" />
 </LinearLayout>
