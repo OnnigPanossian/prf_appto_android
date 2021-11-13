@@ -1,110 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relative_reg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.RegisterFragment">
 
-    <RelativeLayout
-        android:id="@+id/relative_reg"
+    <TextView
+        android:id="@+id/title_reg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="Crear Cuenta"
+        android:textAppearance="?attr/textAppearanceHeadline4"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/linear_reg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        tools:context=".activities.RegisterActivity">
+        android:layout_below="@id/title_reg"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/title_reg"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_reg"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:text="Create Account"
-            android:textAppearance="?attr/textAppearanceHeadline4"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:layout_marginTop="120dp"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="Email *"
+            android:inputType="textEmailAddress"
+            app:errorEnabled="true"
+            app:startIconDrawable="@drawable/ic_person">
 
-        <LinearLayout
-            android:id="@+id/linear_reg"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputMail_reg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/pass_reg"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/title_reg"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="40dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:hint="Contraseña *"
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
+            app:startIconDrawable="@drawable/ic_key">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/email_reg"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputPass_reg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="120dp"
-                android:layout_marginBottom="10dp"
-                android:ems="10"
-                android:hint="Email *"
-                android:inputType="textEmailAddress"
-                app:errorEnabled="true"
-                app:startIconDrawable="@drawable/ic_person">
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputMail_reg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/input_color"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:id="@+id/button_reg"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="90dp"
+            android:backgroundTint="@color/main_color"
+            android:text="Aceptar" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/pass_reg"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Password *"
-                app:errorEnabled="true"
-                app:passwordToggleEnabled="true"
-                app:startIconDrawable="@drawable/ic_key">
+        <TextView
+            android:id="@+id/alReady_reg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="¿Ya tenés una cuenta?" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputPass_reg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/input_color"
-                    android:inputType="textPassword" />
-            </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/login_reg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            android:text="¡INICIA SESIÓN!"
+            android:textColor="@color/main_color" />
+    </LinearLayout>
 
-            <Button
-                android:id="@+id/button_reg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="90dp"
-                android:width="180dp"
-                android:height="55dp"
-                android:backgroundTint="@color/main_color"
-                android:text="Create Account" />
-
-            <TextView
-                android:id="@+id/alReady_reg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="Already have an account?"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/login_reg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="@color/white"
-                android:text="Login"
-                android:textColor="@color/main_color" />
-        </LinearLayout>
-
-    </RelativeLayout>
-
-</FrameLayout>
+</RelativeLayout>

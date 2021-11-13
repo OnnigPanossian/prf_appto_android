@@ -1,7 +1,7 @@
 package com.example.appto.fragments
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
+import com.example.appto.activities.MainActivity
 import com.example.appto.R
 import com.example.appto.databinding.FragmentLoginBinding
 import com.example.appto.session.SessionManager
@@ -32,7 +32,13 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginBinding.inflate(layoutInflater)
         userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
-        binding.buttonLog.setOnClickListener { view ->
+        setObservers()
+
+        binding.createAccountLog.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+
+        binding.buttonLog.setOnClickListener {
             val email = binding.inputMailLog.text.toString()
             val password = binding.inputPassLog.text.toString()
 
@@ -43,19 +49,15 @@ class LoginFragment : Fragment() {
             }
         }
 
-        setObservers()
-
-        binding.createAccountLog.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
-        }
-
         return binding.root
     }
 
     private fun setObservers() {
-        userViewModel.user.observe(this, {
-            findNavController().navigate(R.id.action_loginFragment_to_mapsFragment)
-            sessionManager.saveAuthToken(userViewModel.user.value!!.token.toString())
+        userViewModel.user.observe(this, { user ->
+            if (user != null) {
+                sessionManager.saveAuthToken(userViewModel.user.value!!.token.toString())
+                startActivity(Intent(activity, MainActivity::class.java))
+            }
         })
 
         userViewModel.errorMessage.observe(this, {
@@ -80,5 +82,6 @@ class LoginFragment : Fragment() {
 
         return isEmailValid && isPasswordValid
     }
+
 
 }
