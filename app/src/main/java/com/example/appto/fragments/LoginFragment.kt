@@ -10,8 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import com.example.appto.MainActivity
+import com.example.appto.activities.MainActivity
 import com.example.appto.R
 import com.example.appto.databinding.FragmentLoginBinding
 import com.example.appto.session.SessionManager

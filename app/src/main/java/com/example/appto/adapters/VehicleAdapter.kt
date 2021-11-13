@@ -3,11 +3,10 @@ package com.example.appto.adapters
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.example.appto.R
 import com.example.appto.databinding.VehicleListItemBinding
 import com.example.appto.models.Vehicle
-import com.example.appto.viewmodels.VehicleViewModel
 import com.example.appto.services.vehicleService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -36,10 +35,24 @@ class VehicleAdapter(private val vList: List<Vehicle>) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(vehicle: Vehicle) {
+            setCategoryImage(vehicle.category?.code)
             binding.ratingBar.rating = vehicle.rating
-            binding.tvCategory.text = vehicle.category
-            (vehicle.brand + " " + vehicle.model).also { binding.tvModel.text = it }
-            ("Año: " + vehicle.year.toString()).also { binding.tvYear.text = it }
+            binding.capacity.text = vehicle.category?.capacity.toString()
+            binding.doors.text = vehicle.category?.doors.toString()
+            binding.trunk.text = vehicle.category?.trunkCapacity.toString()
+
+            ("Precio: " + vehicle.category?.costPerMinute.toString()).also {
+                binding.price.text = it
+            }
+            ("Categoría " + vehicle.category?.code?.uppercase()).also {
+                binding.tvCategory.text = it
+            }
+            (vehicle.brand + " " + vehicle.model).also {
+                binding.tvModel.text = it
+            }
+            ("Año: " + vehicle.year.toString()).also {
+                binding.tvYear.text = it
+            }
 
             binding.btnReserve.setOnClickListener {
                 CoroutineScope(Dispatchers.IO).launch {
@@ -53,6 +66,21 @@ class VehicleAdapter(private val vList: List<Vehicle>) :
             }
 
             binding.executePendingBindings()
+        }
+
+        private fun setCategoryImage(code: String?) {
+            when (code?.uppercase()) {
+                "A" -> {
+                    binding.carImage.setImageResource(R.drawable.cat_a)
+                }
+                "B" -> {
+                    binding.carImage.setImageResource(R.drawable.suv)
+                }
+                "C" -> {
+                    binding.carImage.setImageResource(R.drawable.deportivo)
+                }
+                else -> binding.carImage.setImageResource(R.drawable.cat_a)
+            }
         }
     }
 }
