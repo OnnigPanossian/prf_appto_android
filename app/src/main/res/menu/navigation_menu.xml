@@ -27,7 +27,7 @@
 
     <group android:id="@+id/menu_bottom">
         <item
-            android:id="@+id/menuAbout"
+            android:id="@+id/aboutUsFragment"
             android:icon="@drawable/ic_nosotros"
             android:title="Nosotros" />
 
