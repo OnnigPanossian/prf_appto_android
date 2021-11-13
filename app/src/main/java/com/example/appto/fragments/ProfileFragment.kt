@@ -43,6 +43,7 @@ class ProfileFragment : Fragment() {
 
             val user = UpdateUserRequest(name, image, license, phone)
             userViewModel.updateUser(sessionManager.fetchAuthToken(), user)
+            Toast.makeText(activity, "Perfil actualizado correctamente", Toast.LENGTH_LONG).show()
         }
     }
 
