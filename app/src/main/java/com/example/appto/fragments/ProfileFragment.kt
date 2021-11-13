@@ -43,6 +43,7 @@ class ProfileFragment : Fragment() {
 
             val user = UpdateUserRequest(name, image, license, phone)
             userViewModel.updateUser(sessionManager.fetchAuthToken(), user)
+            Toast.makeText(activity, "Perfil actualizado correctamente", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -50,10 +51,11 @@ class ProfileFragment : Fragment() {
     private fun setObservers() {
         userViewModel.user.observe(this, { user ->
             sessionManager.saveUserEmail(userViewModel.user.value!!.email.toString())
-            binding.inputName.hint = user?.name
-            binding.inputPhone.hint = user?.phone
-            binding.inputImage.hint = user?.image
-            binding.inputLicense.hint = user?.license
+            binding.txtEmail.text = user?.email
+            binding.inputName.setText(user?.name)
+            binding.inputPhone.setText(user?.phone)
+            binding.inputImage.setText(user?.image)
+            binding.inputLicense.setText(user?.license)
         })
 
         userViewModel.errorMessage.observe(this, {

@@ -49,4 +49,10 @@
             android:id="@+id/action_qualiFragment_to_mapsFragment"
             app:destination="@id/mapsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.example.appto.fragments.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_about_us" />
+
 </navigation>
