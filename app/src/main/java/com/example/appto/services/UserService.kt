@@ -2,6 +2,7 @@ package com.example.appto.services
 
 import com.example.appto.clients.Retrofit
 import com.example.appto.models.AuthRequest
+import com.example.appto.models.Rental
 import com.example.appto.models.User
 import retrofit2.Response
 import retrofit2.http.*
@@ -23,7 +24,7 @@ interface UserService {
     suspend fun delete(@Header("Authorization") token: String): Response<Void>
 
     @GET("users/rental")
-    fun getRental(@Header("Authorization") token: String): Response<Void> //TODO: Model Rental
+    suspend fun getRental(@Header("Authorization") token: String): Response<Rental>
 }
 
 val userService: UserService = Retrofit.restClient.create(UserService::class.java)

@@ -10,10 +10,6 @@ data class Rental(
     val vehicle: Vehicle,
     @field:Json(name = "user")
     val user: User,
-    @field:Json(name = "withdrawalDate")
-    val withdrawalDate: Date,
-    @field:Json(name = "returnDate")
-    val returnDate: Date,
     @field:Json(name = "parkingOriginId")
     val parkingOriginId: Parking,
     @field:Json(name = "parkingDestinationId")

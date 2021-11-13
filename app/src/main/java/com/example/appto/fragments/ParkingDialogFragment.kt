@@ -48,7 +48,7 @@ class ParkingDialogFragment : DialogFragment() {
                         )
                         findNavController().navigate(action)
                     } else {
-                        vehicleViewModel.returnVehicle(parkingId)
+                        vehicleViewModel.returnVehicle(parkingId, sessionManager.fetchAuthToken()!!)
                         sessionManager.saveRentalInProgress(false)
                     }
                     dialog!!.dismiss()

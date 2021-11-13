@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.appto.models.AuthRequest
+import com.example.appto.models.Rental
 import com.example.appto.models.User
 import com.example.appto.services.userService
 import kotlinx.coroutines.CoroutineExceptionHandler
