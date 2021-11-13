@@ -3,12 +3,12 @@ package com.example.appto.adapters
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appto.R
 import com.example.appto.databinding.VehicleListItemBinding
+import com.example.appto.fragments.VehicleListFragmentDirections
 import com.example.appto.models.Vehicle
-import com.example.appto.viewmodels.VehicleViewModel
 import com.example.appto.services.vehicleService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -67,11 +67,16 @@ class VehicleAdapter(private val vList: List<Vehicle>) :
                 }
             }
 
-            binding.btnReserve.setOnClickListener {
+            binding.btnReserve.setOnClickListener { view ->
                 CoroutineScope(Dispatchers.IO).launch {
                     val res = vehicleService.book(vehicle.id)
                     if (res.isSuccessful) {
                         Log.i("OK", "OK")
+                        val action =
+                            VehicleListFragmentDirections.actionVehicleListFragmentToQualiFragment(
+                                vehicle.id
+                            )
+                        view.findNavController().navigate(action)
                     } else {
                         Log.e("ERROR", "Error")
                     }

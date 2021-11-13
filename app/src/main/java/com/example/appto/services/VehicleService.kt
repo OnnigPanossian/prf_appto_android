@@ -19,6 +19,9 @@ interface VehicleService {
 
     @POST("vehicles/{id}/book")
     suspend fun book(@Path("id") vehicle: String): Response<Void>
+
+    @POST("vehicles/{id}/calificate/{rating}")
+    suspend fun qualification(@Path("id") vehicles: String, @Path("rating") rating: Float): Response<Void>
 }
 
 val vehicleService: VehicleService = restClient.create(VehicleService::class.java)
