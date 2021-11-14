@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.location.Geocoder
 import android.location.Location
+import android.location.LocationRequest
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -34,6 +35,7 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.tasks.CancellationTokenSource
 
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
@@ -52,7 +54,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(context!!)
         requestLocationPermission()
-        setupMap()
 
         return binding.root
     }
@@ -64,6 +65,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             if (location != null) {
                 userLocation.latitude = location.latitude
                 userLocation.longitude = location.longitude
+                setupMap()
             }
         }
     }
