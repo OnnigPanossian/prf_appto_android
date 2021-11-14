@@ -4,10 +4,10 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.example.appto.databinding.ParkingDialogBinding
 import com.example.appto.session.SessionManager
@@ -16,7 +16,6 @@ import com.example.appto.viewmodels.VehicleViewModel
 class ParkingDialogFragment : DialogFragment() {
 
     private lateinit var binding: ParkingDialogBinding
-    private lateinit var vehicleViewModel: VehicleViewModel
     private lateinit var sessionManager: SessionManager
 
     override fun onStart() {
@@ -24,7 +23,6 @@ class ParkingDialogFragment : DialogFragment() {
         val width = (resources.displayMetrics.widthPixels * 0.85).toInt()
         val height = (resources.displayMetrics.heightPixels * 0.40).toInt()
         dialog!!.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
-        vehicleViewModel = ViewModelProvider(this)[VehicleViewModel::class.java]
     }
 
     @SuppressLint("InflateParams")
@@ -43,16 +41,16 @@ class ParkingDialogFragment : DialogFragment() {
             // Inflate and set the layout for the dialog
             // Pass null as the parent view because its going in the dialog layout
             builder.setView(binding.root)
-                .setPositiveButton(text) { _, _ ->
-                    if (!rentalInProgress) {
-                        val action = MapsFragmentDirections.actionMapsFragmentToVehicleListFragment(
-                            parkingId
-                        )
-                        dialog?.dismiss()
-                        findNavController().navigate(action)
+                .setPositiveButton(text) { dialog, _ ->
+
+                    val action: NavDirections = if (!rentalInProgress) {
+                        MapsFragmentDirections.actionMapsFragmentToVehicleListFragment(parkingId)
                     } else {
-                        returnVehicle(parkingId)
+                        MapsFragmentDirections.actionMapsFragmentToQualiFragment(parkingId)
                     }
+                    dialog?.dismiss()
+                    findNavController().navigate(action)
+
                 }
                 .setNegativeButton("Cancelar") { dialog, _ ->
                     dialog.cancel()
@@ -60,29 +58,6 @@ class ParkingDialogFragment : DialogFragment() {
 
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
-    }
-
-    private fun returnVehicle(parkingId: String) {
-        vehicleViewModel.getRental("Bearer ${sessionManager.fetchAuthToken().toString()}")
-
-        vehicleViewModel.rental.observe(this, { rental ->
-            if (rental != null) {
-                vehicleViewModel.returnVehicle(rental.vehicle?.id.toString(), parkingId)
-            }
-        })
-
-        vehicleViewModel.returnSuccess.observe(this, { success ->
-            if (success) {
-                sessionManager.saveRentalInProgress(false)
-                val action = VehicleListFragmentDirections.actionVehicleListFragmentToQualiFragment(
-                    parkingId
-                )
-                dialog?.dismiss()
-                findNavController().navigate(action)
-            } else {
-                Toast.makeText(activity, "Ocurrió un error", Toast.LENGTH_LONG).show()
-            }
-        })
     }
 
     private fun getButtonText(rentalInProgress: Boolean): String {
