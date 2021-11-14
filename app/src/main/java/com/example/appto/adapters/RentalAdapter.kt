@@ -10,15 +10,9 @@ class RentalAdapter(private val rList: List<Rental>) :
     RecyclerView.Adapter<RentalAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
         return ViewHolder(
-            FragmentRentalBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+            FragmentRentalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
-
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -28,7 +22,8 @@ class RentalAdapter(private val rList: List<Rental>) :
 
     override fun getItemCount(): Int = rList.size
 
-    inner class ViewHolder(binding: FragmentRentalBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: FragmentRentalBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(rental: Rental) {
 

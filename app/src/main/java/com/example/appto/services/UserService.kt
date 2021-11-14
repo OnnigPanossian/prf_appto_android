@@ -32,6 +32,9 @@ interface UserService {
 
     @GET("users/rental")
     suspend fun getRental(@Header("Authorization") token: String?): Response<Rental>
+
+    @GET("users/rentals")
+    suspend fun getAllRentals(@Header("Authorization") token: String?): Response<MutableList<Rental>>
 }
 
 val userService: UserService = Retrofit.restClient.create(UserService::class.java)

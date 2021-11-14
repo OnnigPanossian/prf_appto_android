@@ -54,5 +54,10 @@
         android:name="com.example.appto.fragments.AboutUsFragment"
         android:label="fragment_about_us"
         tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/rentalFragment"
+        android:name="com.example.appto.fragments.RentalFragment"
+        android:label="fragment_rental"
+        tools:layout="@layout/fragment_rental" />
 
 </navigation>
