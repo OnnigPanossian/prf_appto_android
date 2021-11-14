@@ -11,5 +11,6 @@
     <color name="input_color">#F9F9F9</color>
     <color name="rating_color">#FFFFC107</color>
     <color name="payment_button">#388E03</color>
-
+    <color name="value_color">#FFA500</color>
+    <color name="class_color">#FF0000</color>
 </resources>
