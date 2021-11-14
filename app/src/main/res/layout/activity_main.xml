@@ -39,6 +39,14 @@
                 android:textColor="@color/white"
                 android:textSize="30sp" />
 
+            <ImageView
+                android:id="@+id/imageFilter"
+                android:layout_marginStart="-30dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_filter" />
+
         </LinearLayout>
 
         <androidx.fragment.app.FragmentContainerView
