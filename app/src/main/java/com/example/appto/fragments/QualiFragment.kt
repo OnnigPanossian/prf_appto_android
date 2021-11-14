@@ -20,7 +20,6 @@ class QualiFragment : Fragment() {
     private lateinit var binding: FragmentQualiBinding
     private lateinit var vehicleViewModel: VehicleViewModel
     private lateinit var sessionManager: SessionManager
-    private lateinit var vehicleId: String
     private val args: QualiFragmentArgs by navArgs()
 
 
@@ -33,11 +32,7 @@ class QualiFragment : Fragment() {
         vehicleViewModel = ViewModelProvider(this)[VehicleViewModel::class.java]
 
         binding.btnQuali.setOnClickListener {
-            vehicleViewModel.qualification(vehicleId, binding.ratingBar.rating)
-        }
-
-        binding.btnReturn.setOnClickListener {
-            vehicleViewModel.getRental("Bearer ${sessionManager.fetchAuthToken().toString()}")
+            vehicleViewModel.qualification(args.vehicleId, binding.ratingBar.rating)
         }
 
         setObervers()
@@ -54,23 +49,6 @@ class QualiFragment : Fragment() {
                 }, 2000)
             } else {
                 Toast.makeText(context, "Ocurrió un error", Toast.LENGTH_LONG).show()
-            }
-        })
-
-        vehicleViewModel.rental.observe(this, { rental ->
-            if (rental != null) {
-                vehicleId = rental.vehicle?.id.toString()
-                vehicleViewModel.returnVehicle(vehicleId, args.parkingId)
-            }
-        })
-
-        vehicleViewModel.returnSuccess.observe(this, { success ->
-            if (success) {
-                sessionManager.saveRentalInProgress(false)
-                binding.layoutReturn.visibility = View.GONE
-                binding.layoutQuali.visibility = View.VISIBLE
-            } else {
-                Toast.makeText(activity, "Ocurrió un error", Toast.LENGTH_LONG).show()
             }
         })
 
