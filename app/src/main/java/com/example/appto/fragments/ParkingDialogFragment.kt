@@ -46,7 +46,7 @@ class ParkingDialogFragment : DialogFragment() {
                     val action: NavDirections = if (!rentalInProgress) {
                         MapsFragmentDirections.actionMapsFragmentToVehicleListFragment(parkingId)
                     } else {
-                        MapsFragmentDirections.actionMapsFragmentToQualiFragment(parkingId)
+                        MapsFragmentDirections.actionMapsFragmentToPaymentFragment(parkingId)
                     }
                     dialog?.dismiss()
                     findNavController().navigate(action)
