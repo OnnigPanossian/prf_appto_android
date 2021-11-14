@@ -21,6 +21,10 @@ class VehicleViewModel : ViewModel() {
     val vehicleList: LiveData<MutableList<Vehicle>>
         get() = _vehicleList
 
+    private var _rentalList = MutableLiveData<MutableList<Rental>>()
+    val rentalList: LiveData<MutableList<Rental>>
+        get() = _rentalList
+
     private var _rental = MutableLiveData<Rental>()
     val rental: LiveData<Rental>
         get() = _rental
@@ -83,13 +87,26 @@ class VehicleViewModel : ViewModel() {
     fun getRental(token: String?) {
         var call: Response<Rental>
         viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
-            Log.i("POR ACA", token.toString())
             call = userService.getRental(token)
             withContext(Dispatchers.IO) {
                 if (call.isSuccessful) {
                     _rental.postValue(call.body())
                 } else {
                     Log.i("RENTAL", "RENTAL")
+                }
+            }
+        }
+    }
+
+    fun getAllRentals(token: String?) {
+        var call: Response<MutableList<Rental>>
+        viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
+            call = userService.getAllRentals(token)
+            withContext(Dispatchers.IO) {
+                if (call.isSuccessful) {
+                    _rentalList.postValue(call.body())
+                } else {
+                    _rentalList.postValue(mutableListOf())
                 }
             }
         }
