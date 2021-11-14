@@ -14,6 +14,7 @@ import com.example.appto.R
 import com.example.appto.databinding.FragmentRegisterBinding
 
 import com.example.appto.viewmodels.UserViewModel
+import com.valdesekamdem.library.mdtoast.MDToast
 
 class RegisterFragment : Fragment() {
 
@@ -53,8 +54,7 @@ class RegisterFragment : Fragment() {
         })
 
         userViewModel.errorMessage.observe(this, {
-            Toast.makeText(activity, "Ocurrió un error al crear la cuenta", Toast.LENGTH_LONG)
-                .show()
+            MDToast.makeText(context, "Ocurrió un error al crear la cuenta", Toast.LENGTH_LONG, MDToast.TYPE_ERROR).show()
         })
     }
 
