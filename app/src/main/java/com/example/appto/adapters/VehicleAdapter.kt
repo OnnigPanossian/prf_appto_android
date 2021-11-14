@@ -3,6 +3,7 @@ package com.example.appto.adapters
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appto.R
@@ -10,15 +11,20 @@ import com.example.appto.databinding.VehicleListItemBinding
 import com.example.appto.models.Vehicle
 import com.example.appto.services.vehicleService
 import com.example.appto.session.SessionManager
+import com.valdesekamdem.library.mdtoast.MDToast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class VehicleAdapter(private val vList: List<Vehicle>) :
+
     RecyclerView.Adapter<VehicleAdapter.ViewHolder>() {
 
+    private lateinit var _parent: ViewGroup
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        _parent = parent
         return ViewHolder(
             VehicleListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
@@ -62,7 +68,7 @@ class VehicleAdapter(private val vList: List<Vehicle>) :
                     val res = vehicleService.book("Bearer ${sessionManager.fetchAuthToken().toString()}", vehicle.id)
                     withContext(Dispatchers.Main) {
                         if (res.isSuccessful) {
-                            Log.i("OK", "OK")
+                            MDToast.makeText(_parent.context, "Reserva realizada con éxito", Toast.LENGTH_LONG, MDToast.TYPE_SUCCESS).show()
                             sessionManager.saveRentalInProgress(true)
                             view.findNavController()
                                 .navigate(R.id.action_vehicleListFragment_to_mapsFragment)
