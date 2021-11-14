@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="9dp"
+        android:paddingTop="30dp">
+
+        <TextView
+            android:id="@+id/tvModel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_person"
+            tools:text="Porsche 911" />
+
+        <TextView
+            android:id="@+id/tvBrand"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_person"
+            tools:text="Porsche 911" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_person"
+            tools:text="Precio: $200" />
+
+        <TextView
+            android:id="@+id/parkingWithdrawal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:gravity="center"
+            app:drawableStartCompat="@drawable/ic_person"
+            tools:text="Clase A" />
+
+        <TextView
+            android:id="@+id/parkingReturn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:gravity="center"
+            app:drawableStartCompat="@drawable/ic_return"
+            tools:text="Año 2021" />
+
+    </LinearLayout>
+
+</layout>

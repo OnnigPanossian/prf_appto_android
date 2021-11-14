@@ -8,20 +8,20 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appto.adapters.RentalAdapter
-import com.example.appto.databinding.FragmentRentalBinding
+import com.example.appto.databinding.FragmentRentalListBinding
 import com.example.appto.session.SessionManager
 import com.example.appto.viewmodels.VehicleViewModel
 
-class RentalFragment : Fragment() {
+class RentalListFragment : Fragment() {
 
-    private lateinit var binding: FragmentRentalBinding
+    private lateinit var binding: FragmentRentalListBinding
     private lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentRentalBinding.inflate(layoutInflater)
+        binding = FragmentRentalListBinding.inflate(layoutInflater)
         sessionManager = SessionManager(context!!)
 
         binding.rRecycler.layoutManager = LinearLayoutManager(activity)

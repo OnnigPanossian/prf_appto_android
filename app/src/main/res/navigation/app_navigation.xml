@@ -56,8 +56,8 @@
         tools:layout="@layout/fragment_about_us" />
     <fragment
         android:id="@+id/rentalFragment"
-        android:name="com.example.appto.fragments.RentalFragment"
+        android:name="com.example.appto.fragments.RentalListFragment"
         android:label="fragment_rental"
-        tools:layout="@layout/fragment_rental" />
+        tools:layout="@layout/fragment_rental_list" />
 
 </navigation>
