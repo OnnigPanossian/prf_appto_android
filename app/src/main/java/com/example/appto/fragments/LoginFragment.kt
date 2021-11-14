@@ -15,6 +15,7 @@ import com.example.appto.activities.MainActivity
 import com.example.appto.databinding.FragmentLoginBinding
 import com.example.appto.session.SessionManager
 import com.example.appto.viewmodels.UserViewModel
+import com.valdesekamdem.library.mdtoast.MDToast
 
 class LoginFragment : Fragment() {
 
@@ -61,7 +62,7 @@ class LoginFragment : Fragment() {
         })
 
         userViewModel.errorMessage.observe(this, {
-            Toast.makeText(activity, "Credenciales inválidas", Toast.LENGTH_LONG).show()
+            MDToast.makeText(context, "Credenciales inválidas", Toast.LENGTH_LONG, MDToast.TYPE_ERROR).show()
         })
     }
 

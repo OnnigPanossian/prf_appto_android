@@ -14,6 +14,7 @@ import com.example.appto.R
 import com.example.appto.databinding.FragmentQualiBinding
 import com.example.appto.session.SessionManager
 import com.example.appto.viewmodels.VehicleViewModel
+import com.valdesekamdem.library.mdtoast.MDToast
 
 class QualiFragment : Fragment() {
 
@@ -42,18 +43,18 @@ class QualiFragment : Fragment() {
     private fun setObervers() {
         vehicleViewModel.qualiSuccess.observe(this, { success ->
             if (success) {
-                Toast.makeText(context, "Gracias por utilizar AppTo", Toast.LENGTH_LONG).show()
+                MDToast.makeText(context, "Gracias por utilizar AppTo", Toast.LENGTH_LONG, MDToast.TYPE_INFO).show()
                 Handler().postDelayed({
                     binding.root.findNavController()
                         .navigate(R.id.action_qualiFragment_to_mapsFragment)
                 }, 2000)
             } else {
-                Toast.makeText(context, "Ocurrió un error", Toast.LENGTH_LONG).show()
+                MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_LONG, MDToast.TYPE_ERROR).show()
             }
         })
 
         vehicleViewModel.errorMessage.observe(this, {
-            Toast.makeText(context, "Ocurrió un error", Toast.LENGTH_LONG).show()
+            MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_LONG, MDToast.TYPE_ERROR).show()
         })
     }
 }

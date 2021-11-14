@@ -11,6 +11,7 @@ import com.example.appto.databinding.FragmentProfileBinding
 import com.example.appto.models.UpdateUserRequest
 import com.example.appto.session.SessionManager
 import com.example.appto.viewmodels.UserViewModel
+import com.valdesekamdem.library.mdtoast.MDToast
 
 class ProfileFragment : Fragment() {
 
@@ -43,7 +44,7 @@ class ProfileFragment : Fragment() {
 
             val user = UpdateUserRequest(name, image, license, phone)
             userViewModel.updateUser(sessionManager.fetchAuthToken(), user)
-            Toast.makeText(activity, "Perfil actualizado correctamente", Toast.LENGTH_LONG).show()
+            MDToast.makeText(context, "Perfil actualizado correctamente", Toast.LENGTH_LONG, MDToast.TYPE_SUCCESS).show()
         }
     }
 
@@ -59,7 +60,7 @@ class ProfileFragment : Fragment() {
         })
 
         userViewModel.errorMessage.observe(this, {
-            Toast.makeText(activity, "Ocurrió un error", Toast.LENGTH_LONG).show()
+            MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_LONG, MDToast.TYPE_ERROR).show()
         })
     }
 }

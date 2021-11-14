@@ -14,6 +14,7 @@ import com.example.appto.databinding.PaymentFragmentBinding
 import com.example.appto.session.SessionManager
 import com.example.appto.viewmodels.RentalViewModel
 import com.example.appto.viewmodels.VehicleViewModel
+import com.valdesekamdem.library.mdtoast.MDToast
 
 class PaymentFragment : Fragment() {
 
@@ -49,6 +50,7 @@ class PaymentFragment : Fragment() {
             if (rental != null) {
                 vehicleId = rental.vehicle?.id.toString()
                 rentalViewModel.pay(rental.id, token)
+                MDToast.makeText(context, "Pago realizado con éxito", Toast.LENGTH_LONG, MDToast.TYPE_SUCCESS).show()
                 vehicleViewModel.returnVehicle(vehicleId, args.parkingId)
             }
         })
@@ -60,12 +62,12 @@ class PaymentFragment : Fragment() {
                 var action = PaymentFragmentDirections.actionPaymentFragmentToQualiFragment(vehicleId)
                 findNavController().navigate(action)
             } else {
-                Toast.makeText(activity, "Ocurrió un error", Toast.LENGTH_LONG).show()
+                MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_LONG, MDToast.TYPE_ERROR).show()
             }
         })
 
         vehicleViewModel.errorMessage.observe(this, {
-            Toast.makeText(context, "Ocurrió un error", Toast.LENGTH_LONG).show()
+            MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_LONG, MDToast.TYPE_ERROR).show()
         })
     }
 
