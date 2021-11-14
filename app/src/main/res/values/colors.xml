@@ -10,5 +10,6 @@
     <color name="main_color">#1F8EE6</color>
     <color name="input_color">#F9F9F9</color>
     <color name="rating_color">#FFFFC107</color>
+    <color name="payment_button">#388E03</color>
 
 </resources>
