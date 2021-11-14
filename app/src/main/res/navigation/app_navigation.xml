@@ -14,8 +14,8 @@
             android:id="@+id/action_mapsFragment_to_vehicleListFragment"
             app:destination="@id/vehicleListFragment" />
         <action
-            android:id="@+id/action_mapsFragment_to_qualiFragment"
-            app:destination="@id/qualiFragment" />
+            android:id="@+id/action_mapsFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
     </fragment>
     <fragment
         android:id="@+id/vehicleListFragment"
@@ -28,9 +28,6 @@
         <action
             android:id="@+id/action_vehicleListFragment_to_mapsFragment"
             app:destination="@id/mapsFragment" />
-        <action
-            android:id="@+id/action_vehicleListFragment_to_qualiFragment"
-            app:destination="@id/qualiFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -43,7 +40,7 @@
         android:label="fragment_quali"
         tools:layout="@layout/fragment_quali">
         <argument
-            android:name="parkingId"
+            android:name="vehicleId"
             app:argType="string" />
         <action
             android:id="@+id/action_qualiFragment_to_mapsFragment"
@@ -54,5 +51,17 @@
         android:name="com.example.appto.fragments.AboutUsFragment"
         android:label="fragment_about_us"
         tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.example.appto.fragments.PaymentFragment"
+        android:label="payment_fragment"
+        tools:layout="@layout/payment_fragment">
+        <argument
+            android:name="parkingId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_paymentFragment_to_qualiFragment"
+            app:destination="@id/qualiFragment" />
+    </fragment>
 
 </navigation>
