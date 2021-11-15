@@ -43,18 +43,18 @@ class QualiFragment : Fragment() {
     private fun setObervers() {
         vehicleViewModel.qualiSuccess.observe(this, { success ->
             if (success) {
-                MDToast.makeText(context, "Gracias por utilizar AppTo", Toast.LENGTH_LONG, MDToast.TYPE_INFO).show()
+                MDToast.makeText(context, "Gracias por utilizar AppTo", Toast.LENGTH_SHORT, MDToast.TYPE_INFO).show()
                 Handler().postDelayed({
                     binding.root.findNavController()
                         .navigate(R.id.action_qualiFragment_to_mapsFragment)
                 }, 2000)
             } else {
-                MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_LONG, MDToast.TYPE_ERROR).show()
+                MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show()
             }
         })
 
         vehicleViewModel.errorMessage.observe(this, {
-            MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_LONG, MDToast.TYPE_ERROR).show()
+            MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show()
         })
     }
 }

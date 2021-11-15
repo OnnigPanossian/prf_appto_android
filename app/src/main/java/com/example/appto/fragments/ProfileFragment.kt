@@ -44,7 +44,7 @@ class ProfileFragment : Fragment() {
 
             val user = UpdateUserRequest(name, image, license, phone)
             userViewModel.updateUser(sessionManager.fetchAuthToken(), user)
-            MDToast.makeText(context, "Perfil actualizado correctamente", Toast.LENGTH_LONG, MDToast.TYPE_SUCCESS).show()
+            MDToast.makeText(context, "Perfil actualizado correctamente", Toast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show()
         }
     }
 
@@ -60,7 +60,7 @@ class ProfileFragment : Fragment() {
         })
 
         userViewModel.errorMessage.observe(this, {
-            MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_LONG, MDToast.TYPE_ERROR).show()
+            MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show()
         })
     }
 }

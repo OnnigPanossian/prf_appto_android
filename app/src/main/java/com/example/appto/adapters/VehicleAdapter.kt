@@ -68,7 +68,7 @@ class VehicleAdapter(private val vList: List<Vehicle>) :
                     val res = vehicleService.book("Bearer ${sessionManager.fetchAuthToken().toString()}", vehicle.id)
                     withContext(Dispatchers.Main) {
                         if (res.isSuccessful) {
-                            MDToast.makeText(_parent.context, "Reserva realizada con éxito", Toast.LENGTH_LONG, MDToast.TYPE_SUCCESS).show()
+                            MDToast.makeText(_parent.context, "Reserva realizada con éxito", Toast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show()
                             sessionManager.saveRentalInProgress(true)
                             view.findNavController()
                                 .navigate(R.id.action_vehicleListFragment_to_mapsFragment)

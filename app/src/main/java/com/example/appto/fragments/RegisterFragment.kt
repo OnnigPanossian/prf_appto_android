@@ -54,7 +54,7 @@ class RegisterFragment : Fragment() {
         })
 
         userViewModel.errorMessage.observe(this, {
-            MDToast.makeText(context, "Ocurrió un error al crear la cuenta", Toast.LENGTH_LONG, MDToast.TYPE_ERROR).show()
+            MDToast.makeText(context, "Ocurrió un error al crear la cuenta", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show()
         })
     }
 
