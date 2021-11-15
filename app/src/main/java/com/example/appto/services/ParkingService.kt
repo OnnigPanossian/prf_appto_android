@@ -6,8 +6,7 @@ import retrofit2.http.*
 
 interface ParkingService {
     @GET("parking")
-    // /?category=a,b
-    suspend fun getAll(@Query("category") uid: String): MutableList<Parking>
+    suspend fun getAll(@Query("category") category: String): MutableList<Parking>
 
     @GET("parking/{id}")
     fun getById(@Path("id") parking: String): String
