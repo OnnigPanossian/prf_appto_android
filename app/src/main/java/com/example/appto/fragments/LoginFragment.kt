@@ -57,6 +57,7 @@ class LoginFragment : Fragment() {
         userViewModel.user.observe(this, { user ->
             if (user != null) {
                 sessionManager.saveAuthToken(userViewModel.user.value!!.token.toString())
+                MDToast.makeText(context, "Inicio de sesión correcto", Toast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show()
                 startActivity(Intent(activity, MainActivity::class.java))
             }
         })
