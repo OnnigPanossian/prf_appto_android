@@ -25,7 +25,7 @@ class RentalAdapter(private val rList: List<Rental>) :
     inner class ViewHolder(private val binding: FragmentRentalItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(rental: Rental) {
-            binding.parkingReturn.text = rental.parkingDestination?.name.toString()
+            binding.parkingReturn.text = if (rental.parkingDestination != null) rental.parkingDestination.name else ""
             binding.parkingWithdrawal.text = rental.parkingOrigin?.name.toString()
             "$ ${rental.finalPrice.toString()}".also { binding.price.text = it }
             binding.tvBrand.text = rental.vehicle?.brand.toString()
