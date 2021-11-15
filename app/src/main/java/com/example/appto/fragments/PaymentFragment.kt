@@ -49,9 +49,9 @@ class PaymentFragment : Fragment() {
         vehicleViewModel.rental.observe(this, { rental ->
             if (rental != null) {
                 vehicleId = rental.vehicle?.id.toString()
+                vehicleViewModel.returnVehicle(vehicleId, args.parkingId)
                 rentalViewModel.pay(rental.id, token)
                 MDToast.makeText(context, "Pago realizado con éxito", Toast.LENGTH_LONG, MDToast.TYPE_SUCCESS).show()
-                vehicleViewModel.returnVehicle(vehicleId, args.parkingId)
             }
         })
 
@@ -62,12 +62,12 @@ class PaymentFragment : Fragment() {
                 var action = PaymentFragmentDirections.actionPaymentFragmentToQualiFragment(vehicleId)
                 findNavController().navigate(action)
             } else {
-                MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_LONG, MDToast.TYPE_ERROR).show()
+                MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show()
             }
         })
 
         vehicleViewModel.errorMessage.observe(this, {
-            MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_LONG, MDToast.TYPE_ERROR).show()
+            MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show()
         })
     }
 

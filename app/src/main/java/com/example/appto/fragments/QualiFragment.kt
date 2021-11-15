@@ -49,12 +49,12 @@ class QualiFragment : Fragment() {
                         .navigate(R.id.action_qualiFragment_to_mapsFragment)
                 }, 2000)
             } else {
-                MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_LONG, MDToast.TYPE_ERROR).show()
+                MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show()
             }
         })
 
         vehicleViewModel.errorMessage.observe(this, {
-            MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_LONG, MDToast.TYPE_ERROR).show()
+            MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show()
         })
     }
 }

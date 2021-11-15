@@ -62,7 +62,7 @@ class LoginFragment : Fragment() {
         })
 
         userViewModel.errorMessage.observe(this, {
-            MDToast.makeText(context, "Credenciales inválidas", Toast.LENGTH_LONG, MDToast.TYPE_ERROR).show()
+            MDToast.makeText(context, "Credenciales inválidas", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show()
         })
     }
 

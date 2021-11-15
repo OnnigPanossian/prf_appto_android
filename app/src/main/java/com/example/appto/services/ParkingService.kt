@@ -2,14 +2,11 @@ package com.example.appto.services
 
 import com.example.appto.clients.Retrofit
 import com.example.appto.models.Parking
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ParkingService {
     @GET("parking")
-    suspend fun getAll(): MutableList<Parking>
+    suspend fun getAll(@Query("category") category: String): MutableList<Parking>
 
     @GET("parking/{id}")
     fun getById(@Path("id") parking: String): String
