@@ -62,12 +62,12 @@ class PaymentFragment : Fragment() {
                 var action = PaymentFragmentDirections.actionPaymentFragmentToQualiFragment(vehicleId)
                 findNavController().navigate(action)
             } else {
-                MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_LONG, MDToast.TYPE_ERROR).show()
+                MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show()
             }
         })
 
         vehicleViewModel.errorMessage.observe(this, {
-            MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_LONG, MDToast.TYPE_ERROR).show()
+            MDToast.makeText(context, "Ocurrió un error", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show()
         })
     }
 
