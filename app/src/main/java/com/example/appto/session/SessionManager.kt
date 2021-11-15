@@ -14,6 +14,7 @@ class SessionManager(context: Context) {
     companion object {
         const val USER_TOKEN = "token"
         const val USER_EMAIL = "email"
+        const val USER_NAME = "name"
         const val RENTAL_IN_PROGRESS = "inProgress"
     }
 
@@ -47,6 +48,16 @@ class SessionManager(context: Context) {
      */
     fun fetchUserEmail(): String? {
         return prefs.getString(USER_EMAIL, null)
+    }
+
+    fun saveUserName(name: String?) {
+        val editor = prefs.edit()
+        editor.putString(USER_NAME, name)
+        editor.apply()
+    }
+
+    fun fetchUserName(): String? {
+        return prefs.getString(USER_NAME, null)
     }
 
 

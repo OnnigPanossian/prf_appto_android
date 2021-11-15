@@ -2,6 +2,7 @@ package com.example.appto.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
@@ -46,6 +47,8 @@ class MainActivity : AppCompatActivity() {
                 sessionManager.saveAuthToken(null)
                 startActivity(Intent(this, AuthActivity::class.java))
                 finish()
+            } else {
+                navigationView.findViewById<TextView>(R.id.userName).text = sessionManager.fetchUserEmail()
             }
         })
 

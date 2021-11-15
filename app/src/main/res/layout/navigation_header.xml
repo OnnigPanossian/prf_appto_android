@@ -7,8 +7,8 @@
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/imageProfile"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_person"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,8 +29,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="Axel Podostrojec"
-        android:textSize="18sp"
+        android:textSize="10sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/viewSupporter"
         app:layout_constraintStart_toEndOf="@id/imageProfile" />
@@ -42,7 +41,7 @@
         android:fontFamily="@font/faster_one"
         android:text="Premium"
         android:textColor="@color/rating_color"
-        android:textSize="16sp"
+        android:textSize="10sp"
         app:layout_constraintStart_toEndOf="@id/imageProfile"
         app:layout_constraintTop_toBottomOf="@id/viewSupporter" />
 
