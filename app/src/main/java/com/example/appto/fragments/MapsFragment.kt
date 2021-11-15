@@ -8,12 +8,14 @@ import android.graphics.Canvas
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationRequest
+import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -21,9 +23,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.example.appto.R
+import com.example.appto.databinding.ActivityMainBinding
 import com.example.appto.databinding.FragmentMapsBinding
 import com.example.appto.models.Parking
+import com.example.appto.session.SessionManager
 import com.example.appto.viewmodels.ParkingViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -45,6 +50,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private val userLocation = Location("")
     private var parkings = mutableListOf<Parking>()
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val args: MapsFragmentArgs by navArgs()
+    private lateinit var parkingViewModel: ParkingViewModel
+    private lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,8 +60,21 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     ): View {
         binding = FragmentMapsBinding.inflate(layoutInflater)
 
+        parkingViewModel = ViewModelProvider(this)[ParkingViewModel::class.java]
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(context!!)
         requestLocationPermission()
+
+        sessionManager = SessionManager(context!!)
+
+        if (sessionManager.isRentalInProgress()) {
+            binding.imageFilter.visibility = View.GONE
+        }
+
+        binding.imageFilter.setOnClickListener {
+            val dialog = FiltersDialogFragment()
+            dialog.show(childFragmentManager, "FiltersDialogFragment")
+        }
 
         return binding.root
     }
@@ -140,7 +161,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         val icon = getIcon()
 
         // Ubicamos cada parking en el mapa de acuerdo a su lat y long
-        val parkingViewModel = ViewModelProvider(this)[ParkingViewModel::class.java]
+        parkingViewModel.filterParkings(args.filters)
         parkingViewModel.parkings.observe(this, { parkings ->
             parkings.forEach { p ->
                 val position = LatLng(p.lat, p.long)

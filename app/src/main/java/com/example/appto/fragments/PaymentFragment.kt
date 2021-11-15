@@ -49,9 +49,9 @@ class PaymentFragment : Fragment() {
         vehicleViewModel.rental.observe(this, { rental ->
             if (rental != null) {
                 vehicleId = rental.vehicle?.id.toString()
-                rentalViewModel.pay(rental.id, token)
-                MDToast.makeText(context, "Pago realizado con éxito", Toast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show()
                 vehicleViewModel.returnVehicle(vehicleId, args.parkingId)
+                rentalViewModel.pay(rental.id, token)
+                MDToast.makeText(context, "Pago realizado con éxito", Toast.LENGTH_LONG, MDToast.TYPE_SUCCESS).show()
             }
         })
 
