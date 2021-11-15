@@ -88,7 +88,8 @@
                 android:layout_marginStart="20dp"
                 android:hint="Completá tu telefono"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:inputType="phone"/>
         </LinearLayout>
 
         <LinearLayout
@@ -109,6 +110,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="20dp"
                 android:hint="Ingresá tu número de licencia"
+                android:inputType="number"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -131,6 +133,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="20dp"
                 android:hint="Ingresa una URL de imagen"
+                android:inputType="textUri"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
