@@ -18,11 +18,6 @@
             android:id="@+id/rentalFragment"
             android:icon="@drawable/ic_viajes"
             android:title="Mis Viajes" />
-
-        <item
-            android:id="@+id/menuPayments"
-            android:icon="@drawable/ic_pagos"
-            android:title="Mis Pagos" />
     </group>
 
     <group android:id="@+id/menu_bottom">
