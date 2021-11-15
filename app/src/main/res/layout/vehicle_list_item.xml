@@ -27,7 +27,7 @@
                 <ImageView
                     android:id="@+id/car_image"
                     android:layout_width="120dp"
-                    android:layout_height="100dp"
+                    android:layout_height="84dp"
                     android:layout_gravity="center" />
 
                 <RatingBar
@@ -60,40 +60,40 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        app:drawableStartCompat="@drawable/ic_car"
-                        tools:text="Porsche 911"
                         android:textStyle="bold"
-                        app:drawableTint="@color/main_color" />
+                        app:drawableStartCompat="@drawable/ic_car"
+                        app:drawableTint="@color/main_color"
+                        tools:text="Porsche 911" />
 
                     <TextView
                         android:id="@+id/price"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        app:drawableStartCompat="@drawable/ic_price"
-                        tools:text="$200"
                         android:textStyle="bold"
-                        app:drawableTint="@color/value_color" />
+                        app:drawableStartCompat="@drawable/ic_price"
+                        app:drawableTint="@color/value_color"
+                        tools:text="$200" />
 
                     <TextView
                         android:id="@+id/tvYear"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        app:drawableStartCompat="@drawable/ic_calendar"
-                        tools:text="Año 2021"
                         android:textStyle="bold"
-                        app:drawableTint="@color/payment_button" />
+                        app:drawableStartCompat="@drawable/ic_calendar"
+                        app:drawableTint="@color/payment_button"
+                        tools:text="Año 2021" />
 
                     <TextView
                         android:id="@+id/tvCategory"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:drawableTint="@color/class_color"
                         android:gravity="center"
-                        app:drawableStartCompat="@drawable/ic_class"
-                        tools:text="Clase A"
                         android:textStyle="bold"
-                        android:drawableTint="@color/class_color"/>
+                        app:drawableStartCompat="@drawable/ic_class"
+                        tools:text="Clase A" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
