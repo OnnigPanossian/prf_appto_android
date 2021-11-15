@@ -57,12 +57,19 @@ class LoginFragment : Fragment() {
         userViewModel.user.observe(this, { user ->
             if (user != null) {
                 sessionManager.saveAuthToken(userViewModel.user.value!!.token.toString())
+                sessionManager.saveUserName(userViewModel.user.value!!.name)
+                sessionManager.saveUserImage(userViewModel.user.value!!.image)
                 startActivity(Intent(activity, MainActivity::class.java))
             }
         })
 
         userViewModel.errorMessage.observe(this, {
-            MDToast.makeText(context, "Credenciales inválidas", Toast.LENGTH_SHORT, MDToast.TYPE_ERROR).show()
+            MDToast.makeText(
+                context,
+                "Credenciales inválidas",
+                Toast.LENGTH_SHORT,
+                MDToast.TYPE_ERROR
+            ).show()
         })
     }
 

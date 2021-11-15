@@ -15,6 +15,8 @@ class SessionManager(context: Context) {
         const val USER_TOKEN = "token"
         const val USER_EMAIL = "email"
         const val RENTAL_IN_PROGRESS = "inProgress"
+        const val USER_NAME = "name"
+        const val USER_IMAGE = "image"
     }
 
     /**
@@ -47,6 +49,38 @@ class SessionManager(context: Context) {
      */
     fun fetchUserEmail(): String? {
         return prefs.getString(USER_EMAIL, null)
+    }
+
+    /**
+     * Function to fetch user email
+     */
+    fun fetchUserName(): String? {
+        return prefs.getString(USER_NAME, null)
+    }
+
+    /**
+     * Function to save user email
+     */
+    fun saveUserName(name: String?) {
+        val editor = prefs.edit()
+        editor.putString(USER_NAME, name)
+        editor.apply()
+    }
+
+    /**
+     * Function to fetch user email
+     */
+    fun fetchUserImage(): String? {
+        return prefs.getString(USER_IMAGE, null)
+    }
+
+    /**
+     * Function to save user email
+     */
+    fun saveUserImage(image: String?) {
+        val editor = prefs.edit()
+        editor.putString(USER_IMAGE, image)
+        editor.apply()
     }
 
 
