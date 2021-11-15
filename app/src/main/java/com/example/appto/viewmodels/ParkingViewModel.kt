@@ -29,18 +29,15 @@ class ParkingViewModel : ViewModel() {
         }
     }
 
-    private fun getParamCategory(filters: Filters?): String {
+    private fun getParamCategory(filters: Filters?): String? {
         var paramCategory = ""
         filters?.category?.forEach { s ->
             paramCategory += FiltersUtil.mapCategory()[s] + ","
         }
-        if (paramCategory.isNotEmpty()) {
-            paramCategory = paramCategory.substring(0, paramCategory.length - 1)
-        }
-        return paramCategory
+        return if (paramCategory.isEmpty()) null else paramCategory
     }
 
-    private suspend fun fetchParkings(paramCategory: String): MutableList<Parking> {
+    private suspend fun fetchParkings(paramCategory: String?): MutableList<Parking> {
         try {
             return parkingService.getAll(paramCategory)
         } catch (e: Exception) {

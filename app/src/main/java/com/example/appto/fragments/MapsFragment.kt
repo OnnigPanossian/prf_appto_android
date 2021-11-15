@@ -75,6 +75,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             val dialog = FiltersDialogFragment()
             dialog.show(childFragmentManager, "FiltersDialogFragment")
         }
+        setupMap()
 
         return binding.root
     }
@@ -86,7 +87,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             if (location != null) {
                 userLocation.latitude = location.latitude
                 userLocation.longitude = location.longitude
-                setupMap()
             }
         }
     }

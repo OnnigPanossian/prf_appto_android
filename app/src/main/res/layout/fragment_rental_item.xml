@@ -15,49 +15,63 @@
         android:paddingTop="30dp">
 
         <TextView
-            android:id="@+id/tvModel"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="18sp"
-            app:drawableStartCompat="@drawable/ic_person"
-            tools:text="Porsche 911" />
-
-        <TextView
             android:id="@+id/tvBrand"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:textSize="18sp"
-            app:drawableStartCompat="@drawable/ic_person"
-            tools:text="Porsche 911" />
+            app:drawableStartCompat="@drawable/ic_car"
+            app:drawableTint="@color/main_color"
+            tools:text="Porsche" />
+
+        <TextView
+            android:id="@+id/tvModel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_car"
+            app:drawableTint="@color/main_color"
+            tools:text="911 Carrera" />
 
         <TextView
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
             android:gravity="center"
             android:textSize="18sp"
-            app:drawableStartCompat="@drawable/ic_person"
+            app:drawableStartCompat="@drawable/ic_price"
+            app:drawableTint="@color/value_color"
             tools:text="Precio: $200" />
 
         <TextView
             android:id="@+id/parkingWithdrawal"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="18sp"
+            android:layout_marginTop="5dp"
             android:gravity="center"
-            app:drawableStartCompat="@drawable/ic_person"
-            tools:text="Clase A" />
+            android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_rental"
+            tools:text="Garage Alcorta" />
 
         <TextView
             android:id="@+id/parkingReturn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="18sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:gravity="center"
+            android:textSize="18sp"
             app:drawableStartCompat="@drawable/ic_return"
-            tools:text="Año 2021" />
+            tools:text="Garage La Boca" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
 
     </LinearLayout>
 
