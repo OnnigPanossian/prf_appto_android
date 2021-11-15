@@ -8,6 +8,7 @@ import android.graphics.Canvas
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationRequest
+import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -27,6 +28,7 @@ import com.example.appto.R
 import com.example.appto.databinding.ActivityMainBinding
 import com.example.appto.databinding.FragmentMapsBinding
 import com.example.appto.models.Parking
+import com.example.appto.session.SessionManager
 import com.example.appto.viewmodels.ParkingViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -50,6 +52,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val args: MapsFragmentArgs by navArgs()
     private lateinit var parkingViewModel: ParkingViewModel
+    private lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,7 +65,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(context!!)
         requestLocationPermission()
 
-        //TODO: Si hay rental in progress, hay que sacar el botón de filtro!!
+        sessionManager = SessionManager(context!!)
+
+        if (sessionManager.isRentalInProgress()) {
+            binding.imageFilter.visibility = View.GONE
+        }
 
         binding.imageFilter.setOnClickListener {
             val dialog = FiltersDialogFragment()

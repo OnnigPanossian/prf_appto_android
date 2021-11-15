@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.appto.models.Filters
 import com.example.appto.models.Parking
 import com.example.appto.services.parkingService
+import com.example.appto.utils.FiltersUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -31,7 +32,7 @@ class ParkingViewModel : ViewModel() {
     private fun getParamCategory(filters: Filters?): String {
         var paramCategory = ""
         filters?.category?.forEach { s ->
-            paramCategory += filters.mapCategory()[s] + ","
+            paramCategory += FiltersUtil.mapCategory()[s] + ","
         }
         if (paramCategory.isNotEmpty()) {
             paramCategory = paramCategory.substring(0, paramCategory.length - 1)
