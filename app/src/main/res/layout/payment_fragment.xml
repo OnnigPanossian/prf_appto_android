@@ -29,7 +29,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/number_card"
+            android:id="@+id/numberCard"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,49 +37,70 @@
             android:layout_marginBottom="10dp"
             android:ems="10"
             android:hint="@string/card_number"
-            android:inputType="textNoSuggestions"
-            app:errorEnabled="true"
             app:startIconDrawable="@drawable/ic_card">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputCard_pay"
+                android:id="@+id/inputNumberCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textNoSuggestions" />
+                android:inputType="number"
+                android:maxLength="16"
+                app:errorEnabled="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/date_expiration"
+            android:id="@+id/dateExpiration"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:hint="@string/date_expiration"
-            app:errorEnabled="true"
             app:startIconDrawable="@drawable/ic_date">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputPass_reg"
+                android:id="@+id/inputDateExpiration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textNoSuggestions" />
+                android:inputType="numberSigned"
+                android:maxLength="4"
+                app:errorEnabled="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/security_number"
+            android:id="@+id/securityNumber"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:hint="@string/security_code"
-            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
             app:startIconDrawable="@drawable/ic_key">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputSecurity_pay"
+                android:id="@+id/inputSecurityNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textNoSuggestions" />
+                android:inputType="numberPassword"
+                android:maxLength="4"
+                app:errorEnabled="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/titularName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="@string/titularName"
+            app:startIconDrawable="@drawable/ic_person">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputTitularName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textNoSuggestions"
+                app:errorEnabled="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -89,7 +110,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/payment_button"
-            android:text="REALIZAR PAGO" />
+            android:text="@string/btnPayText" />
     </LinearLayout>
 
 </RelativeLayout>

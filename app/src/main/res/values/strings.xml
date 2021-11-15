@@ -6,4 +6,6 @@
     <string name="card_number">Número de tarjeta</string>
     <string name="date_expiration">Fecha de vencimiento (MMYY)</string>
     <string name="security_code">Código de seguridad</string>
+    <string name="titularName">Nombre y apellido del titular</string>
+    <string name="btnPayText">REALIZAR PAGO</string>
 </resources>
