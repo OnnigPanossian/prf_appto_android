@@ -50,6 +50,7 @@ class RegisterFragment : Fragment() {
 
     private fun setObservers() {
         userViewModel.user.observe(this, {
+            MDToast.makeText(context, "Registro correcto", Toast.LENGTH_SHORT, MDToast.TYPE_SUCCESS).show()
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         })
 

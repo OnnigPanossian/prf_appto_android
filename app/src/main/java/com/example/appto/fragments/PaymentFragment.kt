@@ -36,11 +36,22 @@ class PaymentFragment : Fragment() {
 
         token = "Bearer ${sessionManager.fetchAuthToken().toString()}"
 
+        vehicleViewModel.getRental(token)
+
         binding.btnPay.setOnClickListener {
             val validInputs = validateInputs(binding)
+            val rental = vehicleViewModel.rental.value
 
-            if (validInputs) {
-                vehicleViewModel.getRental(token)
+            if (validInputs && rental != null) {
+                vehicleId = rental.vehicle?.id.toString()
+                vehicleViewModel.returnVehicle(vehicleId, args.parkingId)
+                rentalViewModel.pay(rental.id, token)
+                MDToast.makeText(
+                    context,
+                    "Pago realizado con éxito",
+                    Toast.LENGTH_LONG,
+                    MDToast.TYPE_SUCCESS
+                ).show()
             }
         }
 
@@ -85,18 +96,10 @@ class PaymentFragment : Fragment() {
     }
 
     private fun setObservers() {
-        vehicleViewModel.rental.observe(this, { rental ->
-            if (rental != null) {
-                vehicleId = rental.vehicle?.id.toString()
-                vehicleViewModel.returnVehicle(vehicleId, args.parkingId)
-                rentalViewModel.pay(rental.id, token)
-                MDToast.makeText(
-                    context,
-                    "Pago realizado con éxito",
-                    Toast.LENGTH_LONG,
-                    MDToast.TYPE_SUCCESS
-                ).show()
-            }
+        vehicleViewModel.rental.observe(this, {rental ->
+            binding.btnPay.text = "REALIZAR PAGO POR ${"$"}${rental.finalPrice.toString()}"
+            binding.titlePayment.text = "Pago de viaje #${rental.id.substring(0, 7)}"
+            binding.btnPay.visibility = View.VISIBLE
         })
 
         vehicleViewModel.returnSuccess.observe(this, { success ->

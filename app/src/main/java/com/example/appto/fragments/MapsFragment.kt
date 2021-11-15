@@ -69,6 +69,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
         if (sessionManager.isRentalInProgress()) {
             binding.imageFilter.visibility = View.GONE
+            binding.tvRentalInProgress.visibility = View.VISIBLE
+            binding.progressBar.visibility = View.VISIBLE
         }
 
         binding.imageFilter.setOnClickListener {
