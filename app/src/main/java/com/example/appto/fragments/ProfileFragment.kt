@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.appto.databinding.FragmentProfileBinding
 import com.example.appto.models.UpdateUserRequest
 import com.example.appto.session.SessionManager
@@ -57,6 +58,7 @@ class ProfileFragment : Fragment() {
             binding.inputPhone.setText(user?.phone)
             binding.inputImage.setText(user?.image)
             binding.inputLicense.setText(user?.license)
+            Glide.with(this).load(user?.image).into(binding.profileImage)
         })
 
         userViewModel.errorMessage.observe(this, {
