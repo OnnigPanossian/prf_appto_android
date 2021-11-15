@@ -66,16 +66,6 @@
                         app:drawableTint="@color/main_color" />
 
                     <TextView
-                        android:id="@+id/tvBrand"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        app:drawableStartCompat="@drawable/ic_car"
-                        tools:text="Porsche 911"
-                        android:textStyle="bold"
-                        app:drawableTint="@color/main_color" />
-
-                    <TextView
                         android:id="@+id/price"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
