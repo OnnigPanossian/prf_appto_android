@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.appto.models.Filters
 import com.example.appto.models.Parking
 import com.example.appto.services.parkingService
 import kotlinx.coroutines.Dispatchers
@@ -17,23 +18,31 @@ class ParkingViewModel : ViewModel() {
     val parkings: LiveData<MutableList<Parking>>
         get() = _parkings
 
-    init {
+    fun filterParkings(filters: Filters?) {
         viewModelScope.launch {
             val list = withContext(Dispatchers.IO) {
-                val list = fetchParkings()
+                val list = fetchParkings(getParamCategory(filters))
                 list
             }
             _parkings.value = list
         }
     }
 
-    private suspend fun fetchParkings(): MutableList<Parking> {
+    private fun getParamCategory(filters: Filters?): String {
+        var paramCategory = ""
+        filters?.category?.forEach { s ->
+            paramCategory += filters.mapCategory()[s] + ","
+        }
+        if (paramCategory.isNotEmpty()) {
+            paramCategory = paramCategory.substring(0, paramCategory.length - 1)
+        }
+        return paramCategory
+    }
+
+    private suspend fun fetchParkings(paramCategory: String): MutableList<Parking> {
         try {
-            val parkings = parkingService.getAll()
-            Log.i("Parking: ", parkings.toString())
-            return parkings
+            return parkingService.getAll(paramCategory)
         } catch (e: Exception) {
-            // Mejorar manejo de exceptions
             throw e
         }
     }

@@ -10,12 +10,20 @@
         android:name="com.example.appto.fragments.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps">
+        <argument
+            android:name="filters"
+            app:argType="com.example.appto.models.Filters"
+            android:defaultValue="@null"
+            app:nullable="true"/>
         <action
             android:id="@+id/action_mapsFragment_to_vehicleListFragment"
             app:destination="@id/vehicleListFragment" />
         <action
             android:id="@+id/action_mapsFragment_to_paymentFragment"
             app:destination="@id/paymentFragment" />
+        <action
+            android:id="@+id/action_mapsFragment_self"
+            app:destination="@id/mapsFragment" />
     </fragment>
     <fragment
         android:id="@+id/vehicleListFragment"
