@@ -47,10 +47,6 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        val navigationHeader = NavigationHeaderBinding.inflate(layoutInflater)
-
-
-
         if (sessionManager.fetchUserImage() != null) {
             Glide.with(this).load(sessionManager.fetchUserImage().toString()).into(
                 navigationView.getHeaderView(0).findViewById(R.id.imageProfile)
@@ -69,16 +65,6 @@ class MainActivity : AppCompatActivity() {
                 sessionManager.saveUserEmail(null)
                 startActivity(Intent(this, AuthActivity::class.java))
                 finish()
-            }
-            if (sessionManager.fetchUserImage() != null) {
-                Glide.with(this).load(sessionManager.fetchUserImage().toString()).into(
-                    navigationView.getHeaderView(0).findViewById(R.id.imageProfile)
-                )
-            }
-
-            if (sessionManager.fetchUserName() != null) {
-                navigationView.getHeaderView(0).findViewById<TextView>(R.id.userName).text =
-                    "¡Hola " + sessionManager.fetchUserName().toString() + "!"
             }
         })
 

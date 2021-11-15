@@ -10,6 +10,6 @@ data class Rental(
     val parkingOrigin: Parking?,
     val parkingDestination: Parking?,
     val finalPrice: Float?,
-    val returnDate: String?,
-    val withdrawalDate: String?
+    // val returnDate: Date?,
+    // val withdrawalDate: Date?
 )
