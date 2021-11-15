@@ -55,7 +55,7 @@ class VehicleAdapter(private val vList: List<Vehicle>) :
             ("Categoría " + vehicle.category?.code?.uppercase()).also {
                 binding.tvCategory.text = it
             }
-            (vehicle.brand + " " + vehicle.model).also {
+            (vehicle.brand?.capitalize() + " " + vehicle.model?.capitalize()).also {
                 binding.tvModel.text = it
             }
             ("Año: " + vehicle.year.toString()).also {

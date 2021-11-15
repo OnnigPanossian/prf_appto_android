@@ -29,8 +29,8 @@ class RentalAdapter(private val rList: List<Rental>) :
             binding.parkingReturn.text = rental.parkingDestination?.name.toString()
             binding.parkingWithdrawal.text = rental.parkingOrigin?.name.toString()
             "$ ${rental.finalPrice.toString()}".also { binding.price.text = it }
-            binding.tvBrand.text = rental.vehicle?.brand.toString()
-            binding.tvModel.text = rental.vehicle?.model.toString()
+            binding.tvBrand.text = rental.vehicle?.brand.toString().capitalize()
+            binding.tvModel.text = rental.vehicle?.model.toString().capitalize()
 
             binding.executePendingBindings()
         }
