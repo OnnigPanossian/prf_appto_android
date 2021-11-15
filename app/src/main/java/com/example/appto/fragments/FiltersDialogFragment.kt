@@ -58,6 +58,13 @@ class FiltersDialogFragment : DialogFragment() {
                     findNavController().navigate(action)
 
                 }
+                .setNeutralButton("Remover filtros") { dialog, _ ->
+                    filters.category = listOf()
+                    val action: NavDirections =
+                        MapsFragmentDirections.actionMapsFragmentSelf(filters)
+                    dialog?.dismiss()
+                    findNavController().navigate(action)
+                }
                 .setNegativeButton("Cancelar") { dialog, _ ->
                     dialog.cancel()
                 }
